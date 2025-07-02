@@ -36,7 +36,9 @@ User-agent: Wget/1.24.5
 
 #### DEB Package (Debian, Ubuntu...)
 
-If you have `apt` or `dpkg` installed, download the latest release from GitHub and run one of the following commands
+This package is included in the [Schlunzis PPA](https://github.com/schlunzis/ppa).
+
+Alternatively, if you have `apt` or `dpkg` installed, download the latest release from GitHub and run one of the following commands
 depending on what you want to use. `apt` is recommended. Depending on your setup, you might have to run them with
 `sudo`.
 
