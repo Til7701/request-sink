@@ -1,0 +1,43 @@
+name: Build project with Maven
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: "The project version to build. It should be equal to the version in the pom.xml file."
+
+jobs:
+  verify:
+    name: Verify Project before Build
+    uses: ./.github/workflows/callable-verify.yaml
+
+  build:
+    name: Build DEB package
+    needs:
+      - verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4.2.2
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build and Package
+        run: |
+          ./mvnw versions:set -DnewVersion="${{ inputs.version }}"
+          ./mvnw versions:commit
+          
+          ./mvnw --batch-mode --update-snapshots package
+          ./mvnw --batch-mode jpackage:jpackage
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb
+          path: ./cli/target/request-sink_${{ inputs.version }}_amd64.deb
+          retention-days: 1
+          overwrite: true
+          if-no-files-found: error

@@ -1,0 +1,50 @@
+name: Release Artifacts
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+        description: "The tag to use for the release."
+      prerelease:
+        required: true
+        type: boolean
+        description: "Whether the release is a pre-release."
+
+jobs:
+  release:
+    name: Download and Release Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        name: Download deb-Package
+        with:
+          name: deb
+
+      - name: List artifacts
+        run: ls -al
+
+      - name: Create release body
+        run: |
+          if [ "${{ inputs.prerelease }}" = "true" ]; then
+            echo "This is an alpha release." > release-body.md
+            echo "It is not recommended to use this version." >> release-body.md
+            echo "It is intended for testing and feedback." >> release-body.md
+            echo "Please report any issues on the issue tracker." >> release-body.md
+          else
+            echo "This is a stable release." > release-body.md
+            echo "It is recommended to use this version." >> release-body.md
+            echo "Please report any issues on the issue tracker." >> release-body.md
+          fi
+
+      - uses: ncipollo/release-action@v1
+        name: Create Release and Upload Artifacts
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ inputs.tag }}
+          commit: ${{ github.sha }}
+          prerelease: ${{ inputs.prerelease }}
+          name: "Alpha Release: ${{ inputs.tag }}"
+          artifacts: "*.deb"
+          bodyFile: "release-body.md"
