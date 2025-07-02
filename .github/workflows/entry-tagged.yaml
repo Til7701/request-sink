@@ -19,6 +19,7 @@ jobs:
           echo "version=${version}" >> "$GITHUB_OUTPUT"
 
   build:
+    needs: create-version-string
     uses: ./.github/workflows/callable-build.yaml
     with:
       version: ${{ needs.create-version-string.outputs.version }}
@@ -27,7 +28,6 @@ jobs:
   release-to-github:
     needs:
       - build
-      - create-version-string
     uses: ./.github/workflows/release-gh.yaml
     with:
       tag: ${{ github.ref_name }}
@@ -37,5 +37,4 @@ jobs:
   release-to-ppa:
     needs:
       - build
-      - create-version-string
     uses: ./.github/workflows/release-ppa.yaml
