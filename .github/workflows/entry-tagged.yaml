@@ -38,3 +38,4 @@ jobs:
     needs:
       - build
     uses: ./.github/workflows/release-ppa.yaml
+    secrets: inherit
