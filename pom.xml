@@ -5,7 +5,7 @@
 
     <groupId>de.holube</groupId>
     <artifactId>request-sink</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>request-sink</name>
     <packaging>jlink</packaging>
 
