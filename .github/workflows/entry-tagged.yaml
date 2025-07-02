@@ -25,7 +25,9 @@ jobs:
     secrets: inherit
 
   release-to-github:
-    needs: build
+    needs:
+      - build
+      - create-version-string
     uses: ./.github/workflows/release-gh.yaml
     with:
       tag: ${{ github.ref_name }}
@@ -33,5 +35,7 @@ jobs:
     secrets: inherit
 
   release-to-ppa:
-    needs: build
+    needs:
+      - build
+      - create-version-string
     uses: ./.github/workflows/release-ppa.yaml
