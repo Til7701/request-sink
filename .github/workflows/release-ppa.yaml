@@ -1,0 +1,21 @@
+name: Release Artifacts to PPA
+
+on:
+  workflow_call:
+
+jobs:
+  release:
+    name: Download and Release Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        name: Download deb-Package
+        with:
+          name: deb
+
+      - name: List artifacts
+        run: ls -al
+
+      - name: Upload
+        run: |
+          curl -T *.deb ${{ secrets.FTP_HOST }} --user "${{ secrets.FTP_USER }}:${{ secrets.FTP_SECRET }}"

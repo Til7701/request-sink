@@ -24,10 +24,14 @@ jobs:
       version: ${{ needs.create-version-string.outputs.version }}
     secrets: inherit
 
-  release:
+  release-to-github:
     needs: build
     uses: ./.github/workflows/release-gh.yaml
     with:
       tag: ${{ github.ref_name }}
       prerelease: false
     secrets: inherit
+
+  release-to-ppa:
+    needs: build
+    uses: ./.github/workflows/release-ppa.yaml

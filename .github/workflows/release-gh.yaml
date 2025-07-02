@@ -1,4 +1,4 @@
-name: Release Artifacts
+name: Release Artifacts on GitHub
 
 on:
   workflow_call:
