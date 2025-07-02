@@ -11,7 +11,7 @@
 
     <properties>
         <java.version>24</java.version>
-        <picocli.version>4.7.6</picocli.version>
+        <picocli.version>4.7.7</picocli.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
