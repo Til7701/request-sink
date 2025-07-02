@@ -11,24 +11,18 @@
 
     <properties>
         <java.version>24</java.version>
+        <picocli.version>4.7.6</picocli.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>${picocli.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.panteleyev</groupId>
-                    <artifactId>jpackage-maven-plugin</artifactId>
-                    <version>1.6.6</version>
-                    <configuration>
-                        <vendor>Til7701</vendor>
-                        <javaOptions>
-                            <option>-Dfile.encoding=UTF-8</option>
-                        </javaOptions>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,17 +42,23 @@
                     <noManPages>true</noManPages>
                     <stripDebug>true</stripDebug>
                     <compress>zip-1</compress>
+                    <addOptions>-Drequest_sink.version=${project.version}</addOptions>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.panteleyev</groupId>
                 <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.6.6</version>
                 <configuration>
+                    <vendor>Til7701</vendor>
                     <name>Request-Sink</name>
                     <destination>target</destination>
                     <module>request.sink/de.holube.request_sink.RequestSinkApplication</module>
                     <runtimeImage>target/maven-jlink/default</runtimeImage>
                     <resourceDir>jpackage</resourceDir>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
                 </configuration>
             </plugin>
         </plugins>
