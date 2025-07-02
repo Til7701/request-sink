@@ -45,7 +45,7 @@ apt install request-sink_0.0.1-SNAPSHOT_amd64.deb
 ```
 
 ```bash
-dpkg -i install request-sink_0.0.1-SNAPSHOT_amd64.deb
+dpkg -i request-sink_0.0.1-SNAPSHOT_amd64.deb
 ```
 
 #### Other
