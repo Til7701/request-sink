@@ -8,26 +8,41 @@ A small cli application for logging requests to see what they look like.
 ## Usage
 
 Just run the app and send a request to `localhost:8080`.
-Using a simple `wget` call the following output is produced.
+Using simple `curl` and `wget` call the following output is produced.
 You can use `request-sink --help` to get a list of options to configure.
 
 ```
 $» request-sink        
 Listening for requests on port 8080
-Received Request: 
-Time: 2025-07-02T09:58:54.628260806Z
+================ Request 0 Start ================
+Time:   2025-07-03T16:45:51.717754553Z
+Method: POST
+URI:    /
+----------------- Headers Start -----------------
+Accept:         */*
+Host:           localhost:8080
+User-agent:     curl/8.5.0
+Content-type:   application/x-www-form-urlencoded
+Content-length: 18
+------------------ Headers End ------------------
+------------------ Body Start -------------------
+fancy request body
+------------------- Body End --------------------
+================= Request 0 End =================
+
+========== Request 1 Start ===========
+Time:   2025-07-03T16:47:48.747746321Z
 Method: GET
-URI: /test1?foo=bar
-========== Request Start ==========
----------- Header Start ----------
+URI:    /
+----------- Headers Start ------------
 Accept-encoding: identity
-Accept: */*
-Connection: Keep-Alive
-Host: localhost:8080
-User-agent: Wget/1.24.5
----------- Header End ----------
----------- No body in request ----------
-========== Request End ==========
+Accept:          */*
+Connection:      Keep-Alive
+Host:            localhost:8080
+User-agent:      Wget/1.21.4
+------------ Headers End -------------
+--------- No body in request ---------
+=========== Request 1 End ============
 ```
 
 ## Installation

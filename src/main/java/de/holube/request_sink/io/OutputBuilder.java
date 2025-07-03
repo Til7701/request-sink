@@ -38,8 +38,11 @@ public final class OutputBuilder {
         printSeparator(sb, "Headers End", "-", maxLength);
         if (body.isEmpty())
             printSeparator(sb, "No body in request", "-", maxLength);
-        else
+        else {
+            printSeparator(sb, "Body Start", "-", maxLength);
             sb.append(body).append("\n");
+            printSeparator(sb, "Body End", "-", maxLength);
+        }
         printSeparator(sb, "Request " + id + " End", "=", maxLength);
 
         return sb.toString();
@@ -50,7 +53,10 @@ public final class OutputBuilder {
 
         sb.append(sides.repeat(sideLengths))
                 .append(" ").append(message).append(" ")
-                .append(sides.repeat(sideLengths)).append("\n");
+                .append(sides.repeat(sideLengths));
+        if (sideLengths * 2 + 2 + message.length() < length)
+            sb.append(sides);
+        sb.append("\n");
     }
 
 }
