@@ -61,6 +61,7 @@
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>
                     </javaOptions>
+                    <licenseFile>${project.basedir}/LICENSE</licenseFile>
                 </configuration>
             </plugin>
         </plugins>
