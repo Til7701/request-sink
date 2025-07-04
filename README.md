@@ -8,8 +8,8 @@ A small cli application for logging requests to see what they look like.
 ## Usage
 
 Just run the app and send a request to `localhost:8080`.
-Using simple `curl` and `wget` call the following output is produced.
-You can use `request-sink --help` to get a list of options to configure.
+Using simple `curl` and `wget` calls the following output is produced.
+You can use `request-sink --help` to get a list of options to configure the behaviour.
 
 ```
 $» request-sink        
