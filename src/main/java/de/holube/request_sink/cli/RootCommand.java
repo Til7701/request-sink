@@ -27,6 +27,17 @@ public final class RootCommand implements Runnable {
             showDefaultValue = CommandLine.Help.Visibility.ALWAYS)
     private int port;
 
+    @SuppressWarnings("unused")
+    @CommandLine.Option(
+            names = {
+                    "--status-code",
+                    "-s"
+            },
+            description = "The status code to return.",
+            defaultValue = "200",
+            showDefaultValue = CommandLine.Help.Visibility.ALWAYS)
+    private int statusCode;
+
     @Override
     public void run() {
         try {
@@ -40,7 +51,7 @@ public final class RootCommand implements Runnable {
         InetSocketAddress address = new InetSocketAddress(port);
         HttpServer server = HttpServer.create();
         server.bind(address, 0);
-        server.createContext("/", new Handler());
+        server.createContext("/", new Handler(statusCode));
         server.start();
         IO.println("Listening for requests on port " + port);
     }

@@ -31,24 +31,24 @@ public final class OutputBuilder {
 
         final StringBuilder sb = new StringBuilder();
 
-        printSeparator(sb, "Request " + id + " Start", "=", maxLength);
+        buildSeparator(sb, "Request " + id + " Start", "=", maxLength);
         metadata.build(sb);
-        printSeparator(sb, "Headers Start", "-", maxLength);
+        buildSeparator(sb, "Headers Start", "-", maxLength);
         headers.build(sb);
-        printSeparator(sb, "Headers End", "-", maxLength);
+        buildSeparator(sb, "Headers End", "-", maxLength);
         if (body.isEmpty())
-            printSeparator(sb, "No body in request", "-", maxLength);
+            buildSeparator(sb, "No body in request", "-", maxLength);
         else {
-            printSeparator(sb, "Body Start", "-", maxLength);
+            buildSeparator(sb, "Body Start", "-", maxLength);
             sb.append(body).append("\n");
-            printSeparator(sb, "Body End", "-", maxLength);
+            buildSeparator(sb, "Body End", "-", maxLength);
         }
-        printSeparator(sb, "Request " + id + " End", "=", maxLength);
+        buildSeparator(sb, "Request " + id + " End", "=", maxLength);
 
         return sb.toString();
     }
 
-    private void printSeparator(StringBuilder sb, String message, String sides, int length) {
+    private void buildSeparator(StringBuilder sb, String message, String sides, int length) {
         int sideLengths = (length - message.length() - 2) / 2;
 
         sb.append(sides.repeat(sideLengths))
