@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+# remove the installation folder
+rm -rf /opt/request-sink/
+# remove the link in /bin
+rm -f /bin/request-sink
+
+exit 0

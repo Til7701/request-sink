@@ -99,7 +99,7 @@ Follow the build instructions below and run the `msi` file in the `target` direc
 To build the project, you need the following:
 
 - Java 24 or newer in your PATH or JAVA_HOME
-- on Linux you need to have `dpkg` and some other tools installed. JLink and JPackage will tell you if something is
+- on Linux, you need to have `dpkg` and some other tools installed. JLink and JPackage will tell you if something is
   missing.
 - on Windows, you need to have WiX Toolset installed (https://wixtoolset.org/)
 
@@ -110,6 +110,8 @@ Then run the following command:
 
 ```bash
 ./mvnw clean package jpackage:jpackage
+# for the deb package also run
+./package-deb.sh
 ```
 
 If you don't need the installer, you can leave out the `jpackage:jpacakge` arg.
