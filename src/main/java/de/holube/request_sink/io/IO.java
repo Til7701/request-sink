@@ -9,4 +9,8 @@ public final class IO {
         System.out.println(message); // NOSONAR
     }
 
+    public static void print(String message) {
+        System.out.print(message); // NOSONAR
+    }
+
 }

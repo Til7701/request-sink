@@ -1,6 +1,6 @@
 package de.holube.request_sink.io;
 
-record LineBuilder(
+public record LineBuilder(
         String key,
         String value
 ) {
