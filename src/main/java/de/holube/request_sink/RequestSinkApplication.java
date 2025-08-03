@@ -18,7 +18,9 @@ public final class RequestSinkApplication {
                 .build();
         CommandLine cli = new CommandLine(new RootCommand());
         cli.setColorScheme(colorScheme);
-        cli.execute(args);
+        int exitCode = cli.execute(args);
+        if (exitCode != 0)
+            System.exit(exitCode);
     }
 
 }

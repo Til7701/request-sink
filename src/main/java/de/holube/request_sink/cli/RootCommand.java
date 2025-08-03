@@ -12,7 +12,11 @@ import java.net.InetSocketAddress;
         name = "request-sink",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class,
-        description = "A simple http server listening for requests and logging them."
+        description = "A simple http server listening for requests and logging them.",
+        defaultValueProvider = RootDefaultValueProvider.class,
+        subcommands = {
+                ConfigCommand.class,
+        }
 )
 public final class RootCommand implements Runnable {
 
@@ -23,7 +27,6 @@ public final class RootCommand implements Runnable {
                     "-p"
             },
             description = "The port to listen for requests on.",
-            defaultValue = "8080",
             showDefaultValue = CommandLine.Help.Visibility.ALWAYS)
     private int port;
 
@@ -34,7 +37,6 @@ public final class RootCommand implements Runnable {
                     "-s"
             },
             description = "The status code to return.",
-            defaultValue = "200",
             showDefaultValue = CommandLine.Help.Visibility.ALWAYS)
     private int statusCode;
 
