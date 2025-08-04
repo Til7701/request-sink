@@ -1,12 +1,15 @@
-Package: request-sink
-Version: 0.0.3
+Source: request-sink
 Section: misc
 Maintainer: Til7701 <tilman@holube.de>
 Priority: optional
+Build-Depends: debhelper-compat (= 13), gzip, bash-completion
+Standards-Version: 4.7.2
+Homepage: https://github.com/Til7701/request-sink
+
+Package: request-sink
 Architecture: amd64
-Provides: request-sink
 Description: Simple cli tool to view incoming requests
  request-sink is a command-line tool that allows users to monitor and view
  incoming requests in real-time. It is useful for debugging and analyzing
  network traffic, particularly in development environments.
-Depends: libc6, libgcc-s1, libstdc++6, zlib1g 
+Depends: ${shlibs:Depends}, ${misc:Depends}

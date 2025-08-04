@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: https://github.com/Til7701/request-sink
+Upstream-Name: request-sink
+Upstream-Contact: Tilman Holube <tilman@holube.de>
+
+Files: *
+Copyright: 2025 Tilman Holube <tilman@holube.de>
+License: GPL-3.0-only
