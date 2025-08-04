@@ -1,0 +1,2 @@
+bash ../generated-docs/request-sink.sh request-sink
+zsh ../generated-docs/request-sink.sh request-sink
