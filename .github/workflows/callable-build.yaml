@@ -33,7 +33,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt update
-          sudo apt install -y build-essential debhelper dh-shell-completions
+          sudo apt install -y build-essential debhelper dh-bash-completion
       - name: Build and Package
         run: |
           ./mvnw versions:set -DnewVersion="${{ inputs.version }}"
