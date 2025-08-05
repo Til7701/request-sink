@@ -26,6 +26,10 @@ jobs:
           java-version: '24'
           distribution: 'temurin'
           cache: maven
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y just
       - name: Build and Package
         run: |
           ./mvnw versions:set -DnewVersion="${{ inputs.version }}"
