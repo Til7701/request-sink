@@ -9,17 +9,17 @@ class LineBuilderTest {
 
     @Test
     void testConstructorWithNullKey() {
-        assertThrows(IllegalArgumentException.class, () -> new LineBuilder(null, "value"));
+        assertThrows(NullPointerException.class, () -> new LineBuilder(null, "value"));
     }
 
     @Test
     void testConstructorWithNullValue() {
-        assertThrows(IllegalArgumentException.class, () -> new LineBuilder("key", null));
+        assertThrows(NullPointerException.class, () -> new LineBuilder("key", null));
     }
 
     @Test
     void testConstructorWithBothNull() {
-        assertThrows(IllegalArgumentException.class, () -> new LineBuilder(null, null));
+        assertThrows(NullPointerException.class, () -> new LineBuilder(null, null));
     }
 
     @Test

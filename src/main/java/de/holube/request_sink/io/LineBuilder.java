@@ -24,7 +24,7 @@ public record LineBuilder(
      */
     public LineBuilder {
         if (key == null || value == null) {
-            throw new IllegalArgumentException("Key and value must not be null.");
+            throw new NullPointerException("Key and value must not be null.");
         }
     }
 

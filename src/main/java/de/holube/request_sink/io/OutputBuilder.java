@@ -17,6 +17,8 @@ public final class OutputBuilder {
     }
 
     public void setBody(String body) {
+        if (body == null)
+            throw new NullPointerException("Body cannot be null");
         this.body = body;
     }
 
@@ -27,7 +29,8 @@ public final class OutputBuilder {
     public String build() {
         final int metadataLength = metadata.getLength();
         final int headersLength = headers.getLength();
-        final int maxLength = Math.max(metadataLength, headersLength);
+        final int minLength = String.valueOf(id).length() + 20;
+        final int maxLength = Math.max(Math.max(metadataLength, headersLength), minLength);
 
         final StringBuilder sb = new StringBuilder();
 

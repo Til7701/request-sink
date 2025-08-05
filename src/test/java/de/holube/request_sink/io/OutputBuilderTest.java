@@ -1,0 +1,152 @@
+package de.holube.request_sink.io;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class OutputBuilderTest {
+
+    @Test
+    void testBuildOutput() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        outputBuilder.setId(1);
+        outputBuilder.addMetadataLine("Method", "GET");
+        outputBuilder.addMetadataLine("URL", "/api/test");
+        outputBuilder.addHeaderLine("Content-Type", "application/json");
+        outputBuilder.addHeaderLine("User-Agent", "TestAgent/1.0");
+        outputBuilder.setBody("{\"key\":\"value\"}");
+
+        String actualOutput = outputBuilder.build();
+
+        String expectedOutput = """
+                ====== Request 1 Start =======
+                Method: GET
+                URL:    /api/test
+                ------- Headers Start --------
+                Content-Type: application/json
+                User-Agent:   TestAgent/1.0
+                -------- Headers End ---------
+                --------- Body Start ---------
+                {"key":"value"}
+                ---------- Body End ----------
+                ======= Request 1 End ========
+                """;
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testBuildOutputWithoutBody() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        outputBuilder.setId(2);
+        outputBuilder.addMetadataLine("Method", "POST");
+        outputBuilder.addMetadataLine("URL", "/api/submit");
+        outputBuilder.addHeaderLine("Content-Type", "application/x-www-form-urlencoded");
+        outputBuilder.addHeaderLine("User-Agent", "TestAgent/2.0");
+        outputBuilder.setBody("");
+
+        String actualOutput = outputBuilder.build();
+
+        String expectedOutput = """
+                =============== Request 2 Start ===============
+                Method: POST
+                URL:    /api/submit
+                ---------------- Headers Start ----------------
+                Content-Type: application/x-www-form-urlencoded
+                User-Agent:   TestAgent/2.0
+                ----------------- Headers End -----------------
+                ------------- No body in request --------------
+                ================ Request 2 End ================
+                """;
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testBuildOutputWithEmptyMetadataAndHeaders() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        outputBuilder.setId(3);
+        outputBuilder.setBody("No metadata or headers");
+        String actualOutput = outputBuilder.build();
+        String expectedOutput = """
+                == Request 3 Start ==
+                --- Headers Start ---
+                ---- Headers End ----
+                ---- Body Start -----
+                No metadata or headers
+                ----- Body End ------
+                === Request 3 End ===
+                """;
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testBuildOutputWithOnlyMetadata() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        outputBuilder.setId(4);
+        outputBuilder.addMetadataLine("Method", "PUT");
+        outputBuilder.addMetadataLine("URL", "/api/update?id=123");
+        outputBuilder.setBody("");
+
+        String actualOutput = outputBuilder.build();
+
+        String expectedOutput = """
+                ==== Request 4 Start =====
+                Method: PUT
+                URL:    /api/update?id=123
+                ----- Headers Start ------
+                ------ Headers End -------
+                --- No body in request ---
+                ===== Request 4 End ======
+                """;
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testBuildOutputWithLongId() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        outputBuilder.setId(123456789);
+        outputBuilder.addMetadataLine("Method", "DELETE");
+        outputBuilder.addMetadataLine("URL", "/api/delete?id=456");
+        outputBuilder.addHeaderLine("Content-Type", "text/plain");
+        outputBuilder.setBody("This is a test body for a long ID.");
+
+        String actualOutput = outputBuilder.build();
+
+        String expectedOutput = """
+                == Request 123456789 Start ==
+                Method: DELETE
+                URL:    /api/delete?id=456
+                ------- Headers Start -------
+                Content-Type: text/plain
+                -------- Headers End --------
+                -------- Body Start ---------
+                This is a test body for a long ID.
+                --------- Body End ----------
+                === Request 123456789 End ===
+                """;
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void testAddMetadataLineWithNull() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        assertThrows(NullPointerException.class, () -> outputBuilder.addMetadataLine(null, "value"));
+        assertThrows(NullPointerException.class, () -> outputBuilder.addMetadataLine("key", null));
+        assertThrows(NullPointerException.class, () -> outputBuilder.addMetadataLine(null, null));
+    }
+
+    @Test
+    void testAddHeaderLineWithNull() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        assertThrows(NullPointerException.class, () -> outputBuilder.addHeaderLine(null, "value"));
+        assertThrows(NullPointerException.class, () -> outputBuilder.addHeaderLine("key", null));
+        assertThrows(NullPointerException.class, () -> outputBuilder.addHeaderLine(null, null));
+    }
+
+    @Test
+    void testSetBodyWithNull() {
+        OutputBuilder outputBuilder = new OutputBuilder();
+        assertThrows(NullPointerException.class, () -> outputBuilder.setBody(null));
+    }
+
+}
