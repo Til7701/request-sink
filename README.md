@@ -115,5 +115,5 @@ just build
 If you want the deb package, you can run the following command instead:
 
 ```bash
-just build deb
+just deb
 ```
