@@ -26,13 +26,25 @@ jobs:
           java-version: '24'
           distribution: 'temurin'
           cache: maven
-      - uses: extractions/setup-just@v3
+      - name: Set up Just
+        uses: extractions/setup-just@v3
         with:
           just-version: 1.40.0
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential debhelper devscripts bash-completion
       - name: Build and Package
         run: |
           ./mvnw versions:set -DnewVersion="${{ inputs.version }}"
           ./mvnw versions:commit
+
+          CURRENT_DEB_VERSION=$(dpkg-parsechangelog --show-field Version)
+          if dpkg --compare-versions "$CURRENT_DEB_VERSION" le "${{ inputs.version }}"; then
+            DEBFULLNAME="GitHub Actions"
+            DEBEMAIL="tilman@holube.de" 
+            dch --newversion ${{ inputs.version }} "Version entry to make sure the package is built with the correct version."
+          fi
           
           just deb
       - name: Upload
