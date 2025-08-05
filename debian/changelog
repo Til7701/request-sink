@@ -1,0 +1,5 @@
+request-sink (0.0.3) unstable; urgency=medium
+
+  * Initial release of request-sink packaged with dpkg-buildpackage.
+
+ -- Til7701 <tilman@holube.de>  Mon, 04 Aug 2025 20:55:30 +0200

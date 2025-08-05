@@ -82,17 +82,37 @@
                         <goals>
                             <goal>java</goal>
                         </goals>
+                        <configuration>
+                            <includeProjectDependencies>true</includeProjectDependencies>
+                            <includePluginDependencies>true</includePluginDependencies>
+                            <mainClass>picocli.codegen.docgen.manpage.ManPageGenerator</mainClass>
+                            <arguments>
+                                <argument>--outdir=${project.build.directory}/generated-picocli-docs</argument>
+                                <argument>de.holube.request_sink.cli.RootCommand</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-autocompletion-script</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Dpicocli.autocomplete.systemExitOnError</argument>
+                                <argument>-cp</argument>
+                                <classpath/>
+                                <argument>picocli.AutoComplete</argument>
+                                <argument>--force</argument>
+                                <argument>--completionScript</argument>
+                                <argument>${project.build.directory}/generated-docs/request-sink.sh</argument>
+                                <argument>de.holube.request_sink.cli.RootCommand</argument>
+                            </arguments>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <includeProjectDependencies>true</includeProjectDependencies>
-                    <includePluginDependencies>true</includePluginDependencies>
-                    <mainClass>picocli.codegen.docgen.manpage.ManPageGenerator</mainClass>
-                    <arguments>
-                        <argument>--outdir=${project.build.directory}/generated-picocli-docs</argument>
-                        <argument>de.holube.request_sink.cli.RootCommand</argument>
-                    </arguments>
-                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>info.picocli</groupId>

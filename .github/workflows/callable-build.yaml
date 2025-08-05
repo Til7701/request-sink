@@ -31,9 +31,7 @@ jobs:
           ./mvnw versions:set -DnewVersion="${{ inputs.version }}"
           ./mvnw versions:commit
           
-          ./mvnw --batch-mode --update-snapshots package
-          ./mvnw --batch-mode jpackage:jpackage
-          ./package-deb.sh
+          just deb
       - name: Upload
         uses: actions/upload-artifact@v4
         with:

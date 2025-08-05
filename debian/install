@@ -1,0 +1,2 @@
+../jpackage-image/request-sink/bin/* usr/bin/
+../jpackage-image/request-sink/lib/* usr/lib/request-sink/lib/

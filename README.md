@@ -69,11 +69,11 @@ following commands depending on what you want to use. `apt` is recommended. Depe
 run them with `sudo`.
 
 ```bash
-apt install request-sink_0.0.1-SNAPSHOT_amd64.deb
+apt install request-sink_0.0.3_amd64.deb
 ```
 
 ```bash
-dpkg -i request-sink_0.0.1-SNAPSHOT_amd64.deb
+dpkg -i request-sink_0.0.3_amd64.deb
 ```
 
 #### Other
@@ -109,9 +109,11 @@ To build the project, you need the following:
 Then run the following command:
 
 ```bash
-./mvnw clean package jpackage:jpackage
-# for the deb package also run
-./package-deb.sh
+just build
 ```
 
-If you don't need the installer, you can leave out the `jpackage:jpacakge` arg.
+If you want the deb package, you can run the following command instead:
+
+```bash
+just deb
+```
