@@ -1,6 +1,6 @@
 #!/usr/bin/env just --justfile
 
-# maven build without tests
+# maven build
 build:
     ./mvnw package jpackage:jpackage
 
@@ -10,8 +10,10 @@ deb: build pre-deb
     cp -r ../../debian .
     dpkg-buildpackage -us -uc
 
+# preparation for deb build
 pre-deb:
     mkdir -p target/dpkg-buildpackage-working-dir
 
+# clean up build artifacts
 clean:
     ./mvnw clean
