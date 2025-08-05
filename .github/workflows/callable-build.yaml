@@ -47,6 +47,23 @@ jobs:
           fi
           
           just deb
+      - name: Run Lintian
+        run: |
+          lintian --fail-on=error --pedantic --show-overrides ./target/request-sink_${{ inputs.version }}_amd64.deb
+      - name: Test Installation
+        run: |
+          sudo apt install -y ./target/request-sink_${{ inputs.version }}_amd64.deb
+          request-sink --version
+      - name: Test Uninstallation
+        run: |
+          sudo apt remove -y request-sink
+          [ -e "/usr/bin/request-sink" ] && echo "Exiting: /usr/bin/request-sink exists" && exit 1
+          [ -d "/usr/lib/request-sink" ] && echo "Exiting: /usr/lib/request-sink exists" && exit 1
+          [ -d "/usr/share/doc/request-sink" ] && echo "Exiting: /usr/share/doc/request-sink exists" && exit 1
+          [ -d "/usr/share/bash-completion/completions/request-sink" ] && echo "Exiting: /usr/share/bash-completion/completions/request-sink exists" && exit 1
+          [ -e "/usr/share/man/man1/request-sink.1.gz" ] && echo "Exiting: /usr/share/man/man1/request-sink.1.gz exists" && exit 1
+
+          echo "Uninstallation test passed successfully."
       - name: Upload
         uses: actions/upload-artifact@v4
         with:

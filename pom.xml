@@ -41,7 +41,6 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -67,6 +66,11 @@
                     <compress>zip-1</compress>
                     <addOptions>-Drequest_sink.version=${project.version}</addOptions>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
             </plugin>
             <plugin>
                 <groupId>org.panteleyev</groupId>
