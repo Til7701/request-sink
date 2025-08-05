@@ -49,6 +49,7 @@ jobs:
           just deb
       - name: Run Lintian
         run: |
+          lintian --version
           lintian --fail-on=error --pedantic --show-overrides ./target/request-sink_${{ inputs.version }}_amd64.deb
       - name: Test Installation
         run: |
