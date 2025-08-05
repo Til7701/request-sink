@@ -26,9 +26,13 @@ jobs:
           java-version: '24'
           distribution: 'temurin'
           cache: maven
-      - uses: extractions/setup-just@v3
+      - name: Set up Just
+        uses: extractions/setup-just@v3
         with:
           just-version: 1.40.0
+      - name: Install Dependencies
+        run: |
+          sudo apt install -y build-essential debhelper
       - name: Build and Package
         run: |
           ./mvnw versions:set -DnewVersion="${{ inputs.version }}"
