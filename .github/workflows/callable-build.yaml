@@ -32,6 +32,7 @@ jobs:
           just-version: 1.40.0
       - name: Install Dependencies
         run: |
+          sudo apt update
           sudo apt install -y build-essential debhelper dh-shell-completions
       - name: Build and Package
         run: |
