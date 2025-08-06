@@ -1,3 +1,9 @@
+request-sink (0.0.4) UNRELEASED; urgency=medium
+
+  * T.B.D.
+
+ -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 18:04:55 +0200
+
 request-sink (0.0.3) unstable; urgency=medium
 
   * The debian package now conforms to standard Debian packaging practices
