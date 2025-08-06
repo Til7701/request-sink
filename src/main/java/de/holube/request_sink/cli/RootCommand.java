@@ -1,6 +1,8 @@
 package de.holube.request_sink.cli;
 
 import com.sun.net.httpserver.HttpServer;
+import de.holube.request_sink.cli.providers.RootDefaultValueProvider;
+import de.holube.request_sink.cli.providers.VersionProvider;
 import de.holube.request_sink.io.IO;
 import de.holube.request_sink.server.Handler;
 import picocli.CommandLine;

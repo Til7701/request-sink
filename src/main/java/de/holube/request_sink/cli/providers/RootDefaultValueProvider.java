@@ -1,10 +1,10 @@
-package de.holube.request_sink.cli;
+package de.holube.request_sink.cli.providers;
 
 import de.holube.request_sink.config.Pref;
 import de.holube.request_sink.config.Prefs;
 import picocli.CommandLine;
 
-public class RootDefaultValueProvider implements CommandLine.IDefaultValueProvider {
+public final class RootDefaultValueProvider implements CommandLine.IDefaultValueProvider {
 
     @Override
     public String defaultValue(CommandLine.Model.ArgSpec argSpec) {

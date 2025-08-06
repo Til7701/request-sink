@@ -1,0 +1,49 @@
+name: Test deb Package
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: "The project version to build. It should be equal to the version in the pom.xml file."
+
+jobs:
+  test:
+    name: Test deb Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download deb-Package
+        uses: actions/download-artifact@v4
+        with:
+          name: deb
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y lintian
+      - name: Run Lintian
+        run: |
+          lintian --version
+          lintian --fail-on=error --pedantic --show-overrides ./request-sink_${{ inputs.version }}_amd64.deb || true
+      - name: Test Installation
+        run: |
+          sudo apt install -y ./request-sink_${{ inputs.version }}_amd64.deb
+          request-sink --version
+      - name: Test Usage
+        run: |
+          request-sink --help
+          request-sink config list
+          request-sink config set port 9090
+          request-sink config list
+          request-sink config unset port
+          request-sink config list
+      - name: Test Uninstallation
+        run: |
+          sudo apt remove -y request-sink
+          [ -e "/usr/bin/request-sink" ] && echo "Exiting: /usr/bin/request-sink exists" && exit 1
+          [ -d "/usr/lib/request-sink" ] && echo "Exiting: /usr/lib/request-sink exists" && exit 1
+          [ -d "/usr/share/doc/request-sink" ] && echo "Exiting: /usr/share/doc/request-sink exists" && exit 1
+          [ -d "/usr/share/bash-completion/completions/request-sink" ] && echo "Exiting: /usr/share/bash-completion/completions/request-sink exists" && exit 1
+          [ -e "/usr/share/man/man1/request-sink.1.gz" ] && echo "Exiting: /usr/share/man/man1/request-sink.1.gz exists" && exit 1
+          
+          echo "Tests passed successfully."

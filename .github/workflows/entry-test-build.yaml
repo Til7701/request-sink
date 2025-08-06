@@ -11,3 +11,9 @@ jobs:
     with:
       version: '999.0.0-SNAPSHOT'
     secrets: inherit
+
+  test-deb:
+    needs: build
+    uses: ./.github/workflows/callable-test-deb.yaml
+    with:
+      version: '999.0.0-SNAPSHOT'

@@ -1,33 +1,33 @@
 package de.holube.request_sink.io;
 
+import lombok.NonNull;
+import lombok.Setter;
+
 public final class OutputBuilder {
+
+    @Setter
+    private int id;
 
     private final GroupBuilder metadata = new GroupBuilder();
     private final GroupBuilder headers = new GroupBuilder();
 
+    @Setter
+    @NonNull
     private String body = "";
-    private int id;
 
-    public void addMetadataLine(String key, String value) {
+    public void addMetadataLine(@NonNull String key, @NonNull String value) {
         metadata.addLine(new LineBuilder(key, value));
     }
 
-    public void addHeaderLine(String key, String value) {
+    public void addHeaderLine(@NonNull String key, @NonNull String value) {
         headers.addLine(new LineBuilder(key, value));
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String build() {
         final int metadataLength = metadata.getLength();
         final int headersLength = headers.getLength();
-        final int maxLength = Math.max(metadataLength, headersLength);
+        final int minLength = String.valueOf(id).length() + 20;
+        final int maxLength = Math.max(Math.max(metadataLength, headersLength), minLength);
 
         final StringBuilder sb = new StringBuilder();
 

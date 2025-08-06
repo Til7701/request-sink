@@ -37,10 +37,15 @@ jobs:
       version: ${{ needs.create-alpha-version-string.outputs.version }}
     secrets: inherit
 
+  test-deb:
+    needs: build
+    uses: ./.github/workflows/callable-test-deb.yaml
+    with:
+      version: ${{ needs.create-alpha-version-string.outputs.version }}
+
   release:
     needs:
-      - build
-      - create-alpha-version-string
+      - test-deb
     uses: ./.github/workflows/release-gh.yaml
     with:
       tag: "v${{ needs.create-alpha-version-string.outputs.version }}"
