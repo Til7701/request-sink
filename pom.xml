@@ -95,6 +95,15 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-jlink-plugin</artifactId>
                 <version>3.2.0</version>
                 <extensions>true</extensions>
@@ -105,15 +114,6 @@
                     <stripDebug>true</stripDebug>
                     <compress>zip-1</compress>
                     <addOptions>-Drequest_sink.version=${project.version}</addOptions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.3</version>
-                <configuration>
-                    <!--suppress UnresolvedMavenProperty -->
-                    <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
                 </configuration>
             </plugin>
             <plugin>
