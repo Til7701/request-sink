@@ -1,11 +1,11 @@
-request-sink (0.0.3) UNRELEASED; urgency=medium
+request-sink (0.0.3) unstable; urgency=medium
 
   * The debian package now conforms to standard Debian packaging practices
   * Added man pages
   * Added tab completion for bash
   * Added config subcommand to manage default values for port and status code
 
- -- Til7701 <tilman@holube.de>  Mon, 04 Aug 2025 20:55:30 +0200
+ -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 16:30:00 +0200
 
 
 request-sink (0.0.2) unstable; urgency=medium
