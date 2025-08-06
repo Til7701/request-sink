@@ -1,5 +1,7 @@
 package de.holube.request_sink.io;
 
+import lombok.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public final class GroupBuilder {
      *
      * @param lineBuilder the {@link LineBuilder} to add
      */
-    public void addLine(LineBuilder lineBuilder) {
+    public void addLine(@NonNull LineBuilder lineBuilder) {
         lineBuilders.add(lineBuilder);
 
         final int keyLength = lineBuilder.key().length();
@@ -51,7 +53,7 @@ public final class GroupBuilder {
      *
      * @param sb the {@link StringBuilder} to append the formatted output to
      */
-    public void build(StringBuilder sb) {
+    public void build(@NonNull StringBuilder sb) {
         lineBuilders.forEach(lb -> lb.build(sb, maxKeyLength));
     }
 

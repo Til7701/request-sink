@@ -1,4 +1,4 @@
-package de.holube.request_sink.cli;
+package de.holube.request_sink.cli.providers;
 
 import picocli.CommandLine;
 

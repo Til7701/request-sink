@@ -1,9 +1,9 @@
 package de.holube.request_sink.io;
 
-public final class IO {
+import lombok.NoArgsConstructor;
 
-    private IO() {
-    }
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+public final class IO {
 
     public static void println(String message) {
         System.out.println(message); // NOSONAR

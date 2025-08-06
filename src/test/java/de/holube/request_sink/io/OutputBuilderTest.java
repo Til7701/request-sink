@@ -127,6 +127,7 @@ class OutputBuilderTest {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    @SuppressWarnings("DataFlowIssue")
     @Test
     void testAddMetadataLineWithNull() {
         OutputBuilder outputBuilder = new OutputBuilder();
@@ -135,6 +136,7 @@ class OutputBuilderTest {
         assertThrows(NullPointerException.class, () -> outputBuilder.addMetadataLine(null, null));
     }
 
+    @SuppressWarnings("DataFlowIssue")
     @Test
     void testAddHeaderLineWithNull() {
         OutputBuilder outputBuilder = new OutputBuilder();
@@ -146,6 +148,7 @@ class OutputBuilderTest {
     @Test
     void testSetBodyWithNull() {
         OutputBuilder outputBuilder = new OutputBuilder();
+        //noinspection DataFlowIssue
         assertThrows(NullPointerException.class, () -> outputBuilder.setBody(null));
     }
 

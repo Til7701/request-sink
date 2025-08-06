@@ -9,16 +9,19 @@ class LineBuilderTest {
 
     @Test
     void testConstructorWithNullKey() {
+        //noinspection DataFlowIssue
         assertThrows(NullPointerException.class, () -> new LineBuilder(null, "value"));
     }
 
     @Test
     void testConstructorWithNullValue() {
+        //noinspection DataFlowIssue
         assertThrows(NullPointerException.class, () -> new LineBuilder("key", null));
     }
 
     @Test
     void testConstructorWithBothNull() {
+        //noinspection DataFlowIssue
         assertThrows(NullPointerException.class, () -> new LineBuilder(null, null));
     }
 

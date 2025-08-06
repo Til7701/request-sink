@@ -1,5 +1,7 @@
 package de.holube.request_sink.io;
 
+import lombok.NonNull;
+
 /**
  * This class represents a single line in a formatted output.
  * It contains a key and a value, and provides a method to build the output line
@@ -12,21 +14,11 @@ package de.holube.request_sink.io;
  * @param value the value for the line, which will follow the key
  */
 public record LineBuilder(
+        @NonNull
         String key,
+        @NonNull
         String value
 ) {
-
-    /**
-     * Constructs a LineBuilder with the specified key and value.
-     *
-     * @param key   the key for the line, must not be null
-     * @param value the value for the line, must not be null
-     */
-    public LineBuilder {
-        if (key == null || value == null) {
-            throw new NullPointerException("Key and value must not be null.");
-        }
-    }
 
     /**
      * Builds the formatted line and appends it to the provided StringBuilder.
@@ -38,7 +30,7 @@ public record LineBuilder(
      * @param sb       the StringBuilder to append the formatted line to
      * @param keyWidth the width to which the key should be padded
      */
-    void build(StringBuilder sb, int keyWidth) {
+    void build(@NonNull StringBuilder sb, int keyWidth) {
         if (keyWidth < key.length()) // should never happen
             throw new IllegalArgumentException("Key width is too small for the given key.");
 

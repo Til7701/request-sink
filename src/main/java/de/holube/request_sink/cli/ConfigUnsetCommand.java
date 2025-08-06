@@ -1,7 +1,7 @@
 package de.holube.request_sink.cli;
 
-import de.holube.request_sink.cli.completion.ConfigCompletionCandidates;
 import de.holube.request_sink.cli.mixins.HelpMixin;
+import de.holube.request_sink.cli.providers.ConfigCompletionCandidates;
 import de.holube.request_sink.config.Pref;
 import de.holube.request_sink.config.Prefs;
 import picocli.CommandLine;

@@ -23,6 +23,7 @@ class GroupBuilderTest {
     void testAddLineWithNull() {
         GroupBuilder groupBuilder = new GroupBuilder();
 
+        //noinspection DataFlowIssue
         assertThrows(NullPointerException.class, () -> groupBuilder.addLine(null));
     }
 
