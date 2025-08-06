@@ -39,7 +39,6 @@ jobs:
     with:
       tag: ${{ github.ref_name }}
       prerelease: false
-    secrets: inherit
 
   release-to-ppa:
     needs:
