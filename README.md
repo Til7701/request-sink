@@ -8,15 +8,17 @@ A small cli application for logging requests to see what they look like.
 ## Usage
 
 ```
-Usage: request-sink [-hV] [-p=<port>] [-s=<statusCode>]
+Usage: request-sink [-hV] [-p=<port>] [-s=<statusCode>] [COMMAND]
 A simple http server listening for requests and logging them.
   -h, --help          Show this help message and exit.
   -p, --port=<port>   The port to listen for requests on.
-                        Default: 8080
+                        Default: 9090
   -s, --status-code=<statusCode>
                       The status code to return.
                         Default: 200
   -V, --version       Print version information and exit.
+Commands:
+  config  Configures default options for the request sink server.
 ```
 
 Just run the app and send a request to `localhost:8080`.
