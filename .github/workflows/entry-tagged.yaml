@@ -25,9 +25,16 @@ jobs:
       version: ${{ needs.create-version-string.outputs.version }}
     secrets: inherit
 
+  test-deb:
+    needs: build
+    uses: ./.github/workflows/callable-test-deb.yaml
+    with:
+      version: ${{ needs.create-version-string.outputs.version }}
+    secrets: inherit
+
   release-to-github:
     needs:
-      - build
+      - test-deb
     uses: ./.github/workflows/release-gh.yaml
     with:
       tag: ${{ github.ref_name }}
