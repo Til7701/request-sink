@@ -16,7 +16,7 @@ class GroupBuilderTest {
         groupBuilder.addLine(lineBuilder1);
         groupBuilder.addLine(lineBuilder2);
 
-        assertEquals("key2: value2".length(), groupBuilder.getLength());
+        assertEquals("key2: value2".length(), groupBuilder.getWidth());
     }
 
     @Test
@@ -46,23 +46,23 @@ class GroupBuilderTest {
     }
 
     @Test
-    void testGetLengthWithNoLines() {
+    void testGetWidthWithNoLines() {
         GroupBuilder groupBuilder = new GroupBuilder();
-        assertEquals(2, groupBuilder.getLength());
+        assertEquals(2, groupBuilder.getWidth());
     }
 
     @Test
-    void testGetLengthWithSingleLine() {
+    void testGetWidthWithSingleLine() {
         GroupBuilder groupBuilder = new GroupBuilder();
         LineBuilder lineBuilder = new LineBuilder("singleKey", "singleValue");
 
         groupBuilder.addLine(lineBuilder);
 
-        assertEquals("singleKey: singleValue".length(), groupBuilder.getLength());
+        assertEquals("singleKey: singleValue".length(), groupBuilder.getWidth());
     }
 
     @Test
-    void testGetLengthWithMultipleLines() {
+    void testGetWidthWithMultipleLines() {
         GroupBuilder groupBuilder = new GroupBuilder();
         LineBuilder lineBuilder1 = new LineBuilder("short", "value");
         LineBuilder lineBuilder2 = new LineBuilder("longerKey", "anotherValue");
@@ -70,17 +70,17 @@ class GroupBuilderTest {
         groupBuilder.addLine(lineBuilder1);
         groupBuilder.addLine(lineBuilder2);
 
-        assertEquals("longerKey: anotherValue".length(), groupBuilder.getLength());
+        assertEquals("longerKey: anotherValue".length(), groupBuilder.getWidth());
     }
 
     @Test
-    void testGetLengthWithEmptyLine() {
+    void testGetWidthWithEmptyLine() {
         GroupBuilder groupBuilder = new GroupBuilder();
         LineBuilder lineBuilder1 = new LineBuilder("", "");
 
         groupBuilder.addLine(lineBuilder1);
 
-        assertEquals(2, groupBuilder.getLength());
+        assertEquals(2, groupBuilder.getWidth());
     }
 
 }

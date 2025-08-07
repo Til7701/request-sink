@@ -156,7 +156,7 @@ class OutputBuilderTest {
     void testWithMaxWidth() {
         OutputBuilder outputBuilder = new OutputBuilder();
         outputBuilder.setId(42);
-        outputBuilder.addMetadataLine("URL", "/api/patch?id=78934532946509236592346752347986792348769074259345602906592396");
+        outputBuilder.addMetadataLine("URL", "/api/patch?id=78934532946509236592456456346752347986792348769074259345602906592396");
         outputBuilder.addHeaderLine("Content-Type", "application/json");
         outputBuilder.addHeaderLine("User-Agent", "TestAgent/3.0");
         outputBuilder.setBody("{\"key\":\"value\"}");
@@ -165,8 +165,8 @@ class OutputBuilderTest {
 
         // Default width by picocli is 80 characters.
         String expectedOutput = """
-                =============================== Request 5 Start ================================
-                URL:    /api/patch?id=78934532946509236592346752347986792348769074259345602906592396
+                =============================== Request 42 Start ===============================
+                URL: /api/patch?id=78934532946509236592456456346752347986792348769074259345602906592396
                 -------------------------------- Headers Start ---------------------------------
                 Content-Type: application/json
                 User-Agent:   TestAgent/3.0
@@ -174,7 +174,7 @@ class OutputBuilderTest {
                 ---------------------------------- Body Start ----------------------------------
                 {"key":"value"}
                 ----------------------------------- Body End -----------------------------------
-                ================================ Request 5 End =================================
+                ================================ Request 42 End ================================
                 """;
         assertEquals(expectedOutput, actualOutput);
     }

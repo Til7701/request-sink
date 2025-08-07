@@ -25,45 +25,45 @@ public final class OutputBuilder {
     }
 
     public String build() {
-        final int length = getLength();
+        final int maxWidth = getWidth();
 
         final StringBuilder sb = new StringBuilder();
 
-        buildSeparator(sb, "Request " + id + " Start", "=", length);
+        buildSeparator(sb, "Request " + id + " Start", "=", maxWidth);
         metadata.build(sb);
-        buildSeparator(sb, "Headers Start", "-", length);
+        buildSeparator(sb, "Headers Start", "-", maxWidth);
         headers.build(sb);
-        buildSeparator(sb, "Headers End", "-", length);
+        buildSeparator(sb, "Headers End", "-", maxWidth);
         if (body.isEmpty())
-            buildSeparator(sb, "No body in request", "-", length);
+            buildSeparator(sb, "No body in request", "-", maxWidth);
         else {
-            buildSeparator(sb, "Body Start", "-", length);
+            buildSeparator(sb, "Body Start", "-", maxWidth);
             sb.append(body).append("\n");
-            buildSeparator(sb, "Body End", "-", length);
+            buildSeparator(sb, "Body End", "-", maxWidth);
         }
-        buildSeparator(sb, "Request " + id + " End", "=", length);
+        buildSeparator(sb, "Request " + id + " End", "=", maxWidth);
 
         return sb.toString();
     }
 
-    private int getLength() {
-        final int metadataLength = metadata.getLength();
-        final int headersLength = headers.getLength();
-        final int minLength = String.valueOf(id).length() + 20;
-        final int maxLength = Math.max(Math.max(metadataLength, headersLength), minLength);
+    private int getWidth() {
+        final int metadataLength = metadata.getWidth();
+        final int headersLength = headers.getWidth();
+        final int minWidth = String.valueOf(id).length() + 20;
+        final int maxWidth = Math.max(Math.max(metadataLength, headersLength), minWidth);
         CommandLine.Model.UsageMessageSpec usageMessageSpec = new CommandLine.Model.UsageMessageSpec();
         usageMessageSpec.autoWidth(true);
         final int terminalWidth = usageMessageSpec.width();
-        return Math.min(maxLength, terminalWidth);
+        return Math.min(maxWidth, terminalWidth);
     }
 
-    private void buildSeparator(StringBuilder sb, String message, String sides, int length) {
-        int sideLengths = (length - message.length() - 2) / 2;
+    private void buildSeparator(StringBuilder sb, String message, String sides, int maxWidth) {
+        int sideWidths = (maxWidth - message.length() - 2) / 2;
 
-        sb.append(sides.repeat(sideLengths))
+        sb.append(sides.repeat(sideWidths))
                 .append(" ").append(message).append(" ")
-                .append(sides.repeat(sideLengths));
-        if (sideLengths * 2 + 2 + message.length() < length)
+                .append(sides.repeat(sideWidths));
+        if (sideWidths * 2 + 2 + message.length() < maxWidth)
             sb.append(sides);
         sb.append("\n");
     }
