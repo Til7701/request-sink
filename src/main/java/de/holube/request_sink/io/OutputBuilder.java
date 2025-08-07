@@ -2,6 +2,7 @@ package de.holube.request_sink.io;
 
 import lombok.NonNull;
 import lombok.Setter;
+import picocli.CommandLine;
 
 public final class OutputBuilder {
 
@@ -24,28 +25,36 @@ public final class OutputBuilder {
     }
 
     public String build() {
+        final int length = getLength();
+
+        final StringBuilder sb = new StringBuilder();
+
+        buildSeparator(sb, "Request " + id + " Start", "=", length);
+        metadata.build(sb);
+        buildSeparator(sb, "Headers Start", "-", length);
+        headers.build(sb);
+        buildSeparator(sb, "Headers End", "-", length);
+        if (body.isEmpty())
+            buildSeparator(sb, "No body in request", "-", length);
+        else {
+            buildSeparator(sb, "Body Start", "-", length);
+            sb.append(body).append("\n");
+            buildSeparator(sb, "Body End", "-", length);
+        }
+        buildSeparator(sb, "Request " + id + " End", "=", length);
+
+        return sb.toString();
+    }
+
+    private int getLength() {
         final int metadataLength = metadata.getLength();
         final int headersLength = headers.getLength();
         final int minLength = String.valueOf(id).length() + 20;
         final int maxLength = Math.max(Math.max(metadataLength, headersLength), minLength);
-
-        final StringBuilder sb = new StringBuilder();
-
-        buildSeparator(sb, "Request " + id + " Start", "=", maxLength);
-        metadata.build(sb);
-        buildSeparator(sb, "Headers Start", "-", maxLength);
-        headers.build(sb);
-        buildSeparator(sb, "Headers End", "-", maxLength);
-        if (body.isEmpty())
-            buildSeparator(sb, "No body in request", "-", maxLength);
-        else {
-            buildSeparator(sb, "Body Start", "-", maxLength);
-            sb.append(body).append("\n");
-            buildSeparator(sb, "Body End", "-", maxLength);
-        }
-        buildSeparator(sb, "Request " + id + " End", "=", maxLength);
-
-        return sb.toString();
+        CommandLine.Model.UsageMessageSpec usageMessageSpec = new CommandLine.Model.UsageMessageSpec();
+        usageMessageSpec.autoWidth(true);
+        final int terminalWidth = usageMessageSpec.width();
+        return Math.min(maxLength, terminalWidth);
     }
 
     private void buildSeparator(StringBuilder sb, String message, String sides, int length) {
