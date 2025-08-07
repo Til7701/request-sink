@@ -64,7 +64,17 @@ User-agent:      Wget/1.21.4
 
 #### DEB Package (Debian, Ubuntu...)
 
+##### PPA
+
 This package is included in the [Schlunzis PPA](https://github.com/schlunzis/ppa).
+Follow the instructions there to setup the ppa. Then run the following.
+
+```bash
+sudo apt update
+sudo apt install request-sink
+```
+
+##### Manual Installation
 
 Alternatively, if you have `apt` or `dpkg` installed, download the latest release from GitHub and run one of the
 following commands depending on what you want to use. `apt` is recommended. Depending on your setup, you might have to
@@ -78,19 +88,14 @@ apt install request-sink_0.0.3_amd64.deb
 dpkg -i request-sink_0.0.3_amd64.deb
 ```
 
+##### Post Installation
+
+After installing the deb package, see [Wiki](https://github.com/Til7701/request-sink/wiki/Post-Installation) for further configuration.
+
 #### Other
 
 If you cannot or do not want to install a deb package, you can modify the `pom.xml` file and build the package yourself.
-To do that, modify the following line at the bottom of the file and build the package using the build instructions
-below.
-
-```
-<type>DEB</type>
-```
-
-Here you can choose from the following options: `APP_IMAGE` or `RPM`.
-`APP_IMAGE` is not the click and play AppImage, but an archive containing all files which you can put anywhere and link
-the binary in your shell.
+To do that, build the package using the build instructions below.
 
 ### Windows
 
@@ -114,8 +119,15 @@ Then run the following command:
 just build
 ```
 
+On Linux:
+
+This will create an image of the app in the `target` folder. You can place that anywhere and run `request-sink` in the bin folder.
 If you want the deb package, you can run the following command instead:
 
 ```bash
 just deb
 ```
+
+On Windows:
+
+This will create an `msi` or `exe` file in the `target` folder, which you can run to install `request-sink`.
