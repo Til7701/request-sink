@@ -1,7 +1,6 @@
 name: Verify project with Maven
 
 on:
-  push:
   workflow_call:
 
 jobs:
