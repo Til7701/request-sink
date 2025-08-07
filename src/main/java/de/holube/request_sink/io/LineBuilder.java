@@ -25,7 +25,7 @@ public record LineBuilder(
      * The key is followed by a colon and a space, then padded with spaces
      * to match the specified key width, and finally the value is appended.
      * <p>
-     * The key width must be greater than or equal to the length of the key.
+     * The key width must be greater than or equal to the width of the key.
      *
      * @param sb       the StringBuilder to append the formatted line to
      * @param keyWidth the width to which the key should be padded
