@@ -44,6 +44,6 @@ jobs:
 
   release-to-ppa:
     needs:
-      - build
+      - test-deb
     uses: ./.github/workflows/release-ppa.yaml
     secrets: inherit
