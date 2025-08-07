@@ -77,15 +77,14 @@ sudo apt install request-sink
 ##### Manual Installation
 
 Alternatively, if you have `apt` or `dpkg` installed, download the latest release from GitHub and run one of the
-following commands depending on what you want to use. `apt` is recommended. Depending on your setup, you might have to
-run them with `sudo`.
+following commands depending on what you want to use. `apt` is recommended.
 
 ```bash
-apt install request-sink_0.0.3_amd64.deb
+sudo apt install request-sink_0.0.3_amd64.deb
 ```
 
 ```bash
-dpkg -i request-sink_0.0.3_amd64.deb
+sudo dpkg -i request-sink_0.0.3_amd64.deb
 ```
 
 ##### Post Installation
@@ -106,7 +105,7 @@ Follow the build instructions below and run the `msi` file in the `target` direc
 To build the project, you need the following:
 
 - Java 24 or newer in your PATH or JAVA_HOME
-- on Linux, you need to have `dpkg` and some other tools installed. JLink and JPackage will tell you if something is
+- on Linux, you need to have `dpkg build-essential debhelper devscripts` installed. JLink and JPackage will tell you if something is
   missing.
 - on Windows, you need to have WiX Toolset installed (https://wixtoolset.org/)
 
@@ -130,4 +129,4 @@ just deb
 
 On Windows:
 
-This will create an `msi` or `exe` file in the `target` folder, which you can run to install `request-sink`.
+This will create an `msi` file in the `target` folder, which you can run to install `request-sink`.
