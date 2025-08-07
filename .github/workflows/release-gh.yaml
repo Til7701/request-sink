@@ -17,7 +17,7 @@ jobs:
     name: Download and Release Artifacts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         name: Download deb-Package
         with:
           name: deb
