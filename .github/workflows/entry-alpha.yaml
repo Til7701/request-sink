@@ -13,7 +13,7 @@ jobs:
     outputs:
       version: ${{ steps.step1.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: step1
         name: "Read Version String and write to output"
         run: |
