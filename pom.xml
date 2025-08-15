@@ -15,7 +15,7 @@
         <picocli.version>4.7.7</picocli.version>
         <exec.plugin.version>3.5.1</exec.plugin.version>
         <junit.jupiter.version>5.13.4</junit.jupiter.version>
-        <mockito.version>5.18.0</mockito.version>
+        <mockito.version>5.19.0</mockito.version>
         <argLine/>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
