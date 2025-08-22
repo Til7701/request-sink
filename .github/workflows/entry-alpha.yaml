@@ -53,3 +53,11 @@ jobs:
       tag: "v${{ needs.create-alpha-version-string.outputs.version }}"
       prerelease: true
     secrets: inherit
+
+  release-docker:
+    needs:
+      - test-deb
+    uses: ./.github/workflows/release-docker.yaml
+    with:
+      tag: ${{ needs.create-alpha-version-string.outputs.version }}
+    secrets: inherit
