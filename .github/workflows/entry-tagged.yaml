@@ -47,3 +47,11 @@ jobs:
       - test-deb
     uses: ./.github/workflows/release-ppa.yaml
     secrets: inherit
+
+  release-docker:
+    needs:
+      - test-deb
+    uses: ./.github/workflows/release-docker.yaml
+    with:
+      tag: ${{ needs.create-version-string.outputs.version }}
+    secrets: inherit

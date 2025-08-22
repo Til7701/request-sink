@@ -17,3 +17,7 @@ jobs:
     uses: ./.github/workflows/callable-test-deb.yaml
     with:
       version: '999.0.0-SNAPSHOT'
+
+  test-docker:
+    needs: build
+    uses: ./.github/workflows/callable-test-docker-build.yaml

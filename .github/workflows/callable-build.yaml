@@ -47,11 +47,19 @@ jobs:
           fi
           
           just deb
-      - name: Upload
+      - name: Upload DEB Package
         uses: actions/upload-artifact@v4
         with:
           name: deb
           path: ./target/request-sink_${{ inputs.version }}_amd64.deb
+          retention-days: 1
+          overwrite: true
+          if-no-files-found: error
+      - name: Upload App Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-image
+          path: ./target/jpackage-image/request-sink/
           retention-days: 1
           overwrite: true
           if-no-files-found: error
