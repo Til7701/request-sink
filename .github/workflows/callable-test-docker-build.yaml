@@ -24,6 +24,7 @@ jobs:
         run: |
           ls -al
           ls -al ./target
+          mkdir -p ./target/jpackage-image/request-sink/
           unzip ./target/request-sink-${{ inputs.version }}.zip -d ./target/jpackage-image/request-sink/
           ls -al
           ls -al ./target/jpackage-image/request-sink/
