@@ -2,6 +2,11 @@ name: Test building the Docker image
 
 on:
   workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: "The project version to build. It should be equal to the version in the pom.xml file."
 
 jobs:
 
@@ -17,7 +22,7 @@ jobs:
           path: ./target/request-sink-0.0.4.zip
       - name: Build Docker Image
         run: |
-          unzip ./target/request-sink-0.0.4.zip -d ./target/jpackage-image/request-sink/
+          unzip ./target/request-sink-${{ inputs.version }}.zip -d ./target/jpackage-image/request-sink/
           ls -al
           ls -al ./target/jpackage-image/request-sink/
           ls -al ./target/jpackage-image/request-sink/bin
