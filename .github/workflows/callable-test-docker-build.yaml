@@ -20,15 +20,12 @@ jobs:
         with:
           name: app-image
           path: ./target/
-      - name: Build Docker Image
+      - name: Prepare JPackage Image
         run: |
-          ls -al
-          ls -al ./target
           mkdir -p ./target/jpackage-image/request-sink/
           unzip ./target/request-sink-${{ inputs.version }}.zip -d ./target/jpackage-image/request-sink/
-          ls -al
-          ls -al ./target/jpackage-image/request-sink/
-          ls -al ./target/jpackage-image/request-sink/bin
+      - name: Build Docker Image
+        run: |
           docker build -t request-sink .
       - name: Run Docker Image
         run: docker run --rm -d -p 8080:8080 request-sink > container_id.txt
