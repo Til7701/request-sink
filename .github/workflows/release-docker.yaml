@@ -7,6 +7,10 @@ on:
         required: true
         type: string
         description: "The tag to use for the release."
+      version:
+        required: true
+        type: string
+        description: "The project version to build. It should be equal to the version in the pom.xml file."
 
 env:
   REGISTRY: ghcr.io
@@ -31,7 +35,7 @@ jobs:
       - name: Prepare JPackage Image
         run: |
           mkdir -p ./target/jpackage-image/request-sink/
-          unzip ./target/request-sink-${{ inputs.tag }}.zip -d ./target/jpackage-image/request-sink/
+          unzip ./target/request-sink-${{ inputs.version }}.zip -d ./target/jpackage-image/request-sink/
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3.5.0

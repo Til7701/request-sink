@@ -61,4 +61,5 @@ jobs:
     uses: ./.github/workflows/release-docker.yaml
     with:
       tag: "v${{ needs.create-alpha-version-string.outputs.version }}"
+      version: ${{ needs.create-alpha-version-string.outputs.version }}
     secrets: inherit

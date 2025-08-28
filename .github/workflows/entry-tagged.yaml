@@ -53,5 +53,6 @@ jobs:
       - test-deb
     uses: ./.github/workflows/release-docker.yaml
     with:
-      tag: ${{ needs.create-version-string.outputs.version }}
+      tag: ${{ github.ref_name }}
+      version: ${{ needs.create-version-string.outputs.version }}
     secrets: inherit
