@@ -19,7 +19,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: app-image
-          path: ./target/request-sink-0.0.4.zip
+          path: ./target/request-sink-${{ inputs.version }}.zip
       - name: Build Docker Image
         run: |
           unzip ./target/request-sink-${{ inputs.version }}.zip -d ./target/jpackage-image/request-sink/
