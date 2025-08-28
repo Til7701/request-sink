@@ -32,7 +32,6 @@ jobs:
           just-version: 1.40.0
       - name: Install Dependencies
         run: |
-          sudo apt update
           sudo apt install -y build-essential debhelper devscripts bash-completion
       - name: Build and Package
         run: |
@@ -59,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-image
-          path: ./target/jpackage-image/request-sink/
+          path: ./target/request-sink-${{ inputs.version }}.zip
           retention-days: 1
           overwrite: true
           if-no-files-found: error

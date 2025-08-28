@@ -27,7 +27,11 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: app-image
-          path: ./target/jpackage-image/request-sink/
+          path: ./target/
+      - name: Prepare JPackage Image
+        run: |
+          mkdir -p ./target/jpackage-image/request-sink/
+          unzip ./target/request-sink-${{ inputs.tag }}.zip -d ./target/jpackage-image/request-sink/
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3.5.0

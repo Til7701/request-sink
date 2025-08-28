@@ -21,3 +21,5 @@ jobs:
   test-docker:
     needs: build
     uses: ./.github/workflows/callable-test-docker-build.yaml
+    with:
+      version: '999.0.0-SNAPSHOT'
