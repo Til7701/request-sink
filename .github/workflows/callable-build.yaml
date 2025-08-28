@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-image
-          path: ./target/jpackage-image/request-sink/
+          path: ./target/request-sink-0.0.4.zip
           retention-days: 1
           overwrite: true
           if-no-files-found: error
