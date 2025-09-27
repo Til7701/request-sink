@@ -5,6 +5,8 @@ import de.holube.request_sink.cli.providers.RootDefaultValueProvider;
 import de.holube.request_sink.cli.providers.VersionProvider;
 import de.holube.request_sink.io.HttpStatusCodeFormatter;
 import de.holube.request_sink.server.Handler;
+import de.holube.request_sink.validation.http.status_code.HttpStatusCode;
+import de.holube.request_sink.validation.http.status_code.HttpStatusCodes;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -57,7 +59,17 @@ public final class RootCommand implements Runnable {
         server.bind(address, 0);
         server.createContext("/", new Handler(statusCode));
         server.start();
+        printStatusCodeNotice();
         IO.println("Listening for requests on port " + port);
+    }
+
+    private void printStatusCodeNotice() {
+        if (statusCode < 100 || statusCode > 599) {
+            IO.println("Warning: The provided status code " + statusCode + " is not a valid HTTP status code.");
+        }
+        HttpStatusCode httpStatusCode = HttpStatusCodes.get(statusCode);
+        String message = HttpStatusCodeFormatter.format(httpStatusCode);
+        IO.println("Responding with status code: " + message);
     }
 
 }
