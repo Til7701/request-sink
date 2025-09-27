@@ -19,11 +19,11 @@ jobs:
       - verify
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up JDK
-        uses: actions/setup-java@v4.7.1
+        uses: actions/setup-java@v5
         with:
-          java-version: '24'
+          java-version: '25'
           distribution: 'temurin'
           cache: maven
       - name: Set up Just
@@ -32,7 +32,6 @@ jobs:
           just-version: 1.40.0
       - name: Install Dependencies
         run: |
-          sudo apt update
           sudo apt install -y build-essential debhelper devscripts bash-completion
       - name: Build and Package
         run: |
@@ -47,11 +46,19 @@ jobs:
           fi
           
           just deb
-      - name: Upload
+      - name: Upload DEB Package
         uses: actions/upload-artifact@v4
         with:
           name: deb
           path: ./target/request-sink_${{ inputs.version }}_amd64.deb
+          retention-days: 1
+          overwrite: true
+          if-no-files-found: error
+      - name: Upload App Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-image
+          path: ./target/request-sink-${{ inputs.version }}.zip
           retention-days: 1
           overwrite: true
           if-no-files-found: error

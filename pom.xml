@@ -10,12 +10,12 @@
     <packaging>jlink</packaging>
 
     <properties>
-        <java.version>24</java.version>
-        <lombok.version>1.18.38</lombok.version>
+        <java.version>25</java.version>
+        <lombok.version>1.18.42</lombok.version>
         <picocli.version>4.7.7</picocli.version>
         <exec.plugin.version>3.5.1</exec.plugin.version>
         <junit.jupiter.version>5.13.4</junit.jupiter.version>
-        <mockito.version>5.18.0</mockito.version>
+        <mockito.version>5.20.0</mockito.version>
         <argLine/>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -81,10 +81,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.0</version>
+                <version>3.14.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <release>${java.version}</release>
                     <annotationProcessorPaths>
                         <annotationProcessorPath>
                             <groupId>org.projectlombok</groupId>
@@ -97,7 +96,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.3</version>
+                <version>3.5.4</version>
                 <configuration>
                     <!--suppress UnresolvedMavenProperty -->
                     <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
@@ -119,7 +118,7 @@
             <plugin>
                 <groupId>org.panteleyev</groupId>
                 <artifactId>jpackage-maven-plugin</artifactId>
-                <version>1.6.6</version>
+                <version>1.7.0</version>
                 <configuration>
                     <type>APP_IMAGE</type>
                     <vendor>Til7701</vendor>

@@ -1,0 +1,38 @@
+name: Test building the Docker image
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: "The project version to build. It should be equal to the version in the pom.xml file."
+
+jobs:
+
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download App Image
+        uses: actions/download-artifact@v5
+        with:
+          name: app-image
+          path: ./target/
+      - name: Prepare JPackage Image
+        run: |
+          mkdir -p ./target/jpackage-image/request-sink/
+          unzip ./target/request-sink-${{ inputs.version }}.zip -d ./target/jpackage-image/request-sink/
+      - name: Build Docker Image
+        run: |
+          docker build -t request-sink .
+      - name: Run Docker Image
+        run: docker run --rm -d -p 8080:8080 request-sink > container_id.txt
+      - name: Wait for request-sink to start
+        run: sleep 5
+      - name: Test Docker Container
+        run: |
+          curl -v http://localhost:8080/
+      - name: Stop Docker Container
+        run: docker stop $(cat container_id.txt)
