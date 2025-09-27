@@ -5,7 +5,7 @@ on:
 
 jobs:
   release:
-    name: Download and Release Artifacts
+    name: Download and Release Artifacts to PPA
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v5

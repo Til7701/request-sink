@@ -10,7 +10,7 @@
     <packaging>jlink</packaging>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
         <lombok.version>1.18.42</lombok.version>
         <picocli.version>4.7.7</picocli.version>
         <exec.plugin.version>3.5.1</exec.plugin.version>
@@ -83,8 +83,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.14.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <release>${java.version}</release>
                     <annotationProcessorPaths>
                         <annotationProcessorPath>
                             <groupId>org.projectlombok</groupId>
