@@ -119,7 +119,7 @@
             <plugin>
                 <groupId>org.panteleyev</groupId>
                 <artifactId>jpackage-maven-plugin</artifactId>
-                <version>1.6.6</version>
+                <version>1.7.0</version>
                 <configuration>
                     <type>APP_IMAGE</type>
                     <vendor>Til7701</vendor>
