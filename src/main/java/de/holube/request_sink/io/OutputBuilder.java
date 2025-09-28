@@ -25,7 +25,9 @@ public final class OutputBuilder {
     }
 
     public String build() {
+        CommandLine.tracer().debug("Building output for id: %s", id);
         final int maxWidth = getWidth();
+        CommandLine.tracer().debug("Max Width: %s", maxWidth);
 
         final StringBuilder sb = new StringBuilder();
 
@@ -54,6 +56,7 @@ public final class OutputBuilder {
         CommandLine.Model.UsageMessageSpec usageMessageSpec = new CommandLine.Model.UsageMessageSpec();
         usageMessageSpec.autoWidth(true);
         final int terminalWidth = usageMessageSpec.width();
+        CommandLine.tracer().debug("Detected terminal width: %d", terminalWidth);
         return Math.min(maxWidth, terminalWidth);
     }
 

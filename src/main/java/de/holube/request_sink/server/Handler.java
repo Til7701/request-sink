@@ -3,6 +3,7 @@ package de.holube.request_sink.server;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.holube.request_sink.io.OutputBuilder;
+import picocli.CommandLine;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -33,6 +34,7 @@ public final class Handler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        CommandLine.tracer().debug("Received request");
         OutputBuilder ob = new OutputBuilder();
 
         // Metadata
@@ -49,14 +51,15 @@ public final class Handler implements HttpHandler {
         try {
             String body = new String(exchange.getRequestBody().readAllBytes());
             ob.setBody(body);
-        } catch (IOException _) {
-            // just catch it
+        } catch (IOException e) {
+            CommandLine.tracer().debug("Failed to read request body", e);
         }
 
         IO.println(ob.build());
 
         exchange.sendResponseHeaders(statusCode, -1);
         exchange.close();
+        CommandLine.tracer().debug("Finished handling request.");
     }
 
 }
