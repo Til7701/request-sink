@@ -1,9 +1,13 @@
 package de.holube.request_sink.cli;
 
-import de.holube.request_sink.cli.providers.ConfigCompletionCandidates;
 import de.holube.request_sink.cli.mixins.HelpMixin;
+import de.holube.request_sink.cli.providers.ConfigCompletionCandidates;
 import de.holube.request_sink.config.Pref;
 import de.holube.request_sink.config.Prefs;
+import de.holube.request_sink.io.HttpStatusCodeFormatter;
+import de.holube.request_sink.io.PortFormatter;
+import de.holube.request_sink.validation.http.status_code.HttpStatusCodes;
+import de.holube.request_sink.validation.port.Ports;
 import picocli.CommandLine;
 
 import java.util.Optional;
@@ -45,13 +49,38 @@ public final class ConfigSetCommand implements Runnable {
             );
         }
 
+        String formattedValue = switch (pref.get()) {
+            case PORT -> {
+                ensureNotEmpty(value);
+                int intValue = parseInt(value);
+                yield PortFormatter.format(Ports.get(intValue));
+            }
+            case STATUS_CODE -> {
+                ensureNotEmpty(value);
+                int intValue = parseInt(value);
+                yield HttpStatusCodeFormatter.format(HttpStatusCodes.get(intValue));
+            }
+        };
+        Prefs.put(pref.get(), value);
+        IO.println("Set configuration option '" + key + "' to " + formattedValue);
+    }
+
+    private void ensureNotEmpty(String value) {
         if (value == null || value.isBlank()) {
             throw new CommandLine.ParameterException(spec.commandLine(),
                     "Value for configuration option '" + key + "' must not be empty."
             );
         }
+    }
 
-        Prefs.put(pref.get(), value);
+    private int parseInt(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException _) {
+            throw new CommandLine.ParameterException(spec.commandLine(),
+                    "Value for configuration option '" + key + "' must be an integer."
+            );
+        }
     }
 
 }
