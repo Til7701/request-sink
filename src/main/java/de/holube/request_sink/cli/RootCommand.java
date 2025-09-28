@@ -4,13 +4,18 @@ import com.sun.net.httpserver.HttpServer;
 import de.holube.request_sink.cli.providers.RootDefaultValueProvider;
 import de.holube.request_sink.cli.providers.VersionProvider;
 import de.holube.request_sink.io.HttpStatusCodeFormatter;
+import de.holube.request_sink.io.PortFormatter;
 import de.holube.request_sink.server.Handler;
 import de.holube.request_sink.validation.http.status_code.HttpStatusCode;
 import de.holube.request_sink.validation.http.status_code.HttpStatusCodes;
+import de.holube.request_sink.validation.port.Port;
+import de.holube.request_sink.validation.port.Ports;
 import picocli.CommandLine;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "request-sink",
@@ -22,7 +27,7 @@ import java.net.InetSocketAddress;
                 ConfigCommand.class,
         }
 )
-public final class RootCommand implements Runnable {
+public final class RootCommand implements Callable<Integer> {
 
     @SuppressWarnings("unused")
     @CommandLine.Option(
@@ -45,12 +50,17 @@ public final class RootCommand implements Runnable {
     private int statusCode;
 
     @Override
-    public void run() {
+    public Integer call() {
         try {
             runInternal();
+        } catch (BindException e) {
+            String portInfo = PortFormatter.format(Ports.get(port));
+            IO.println("Error: Could not bind to port " + portInfo + ": " + e.getMessage());
+            return 1;
         } catch (IOException e) {
             throw new RuntimeException(e); // NOSONAR
         }
+        return 0;
     }
 
     private void runInternal() throws IOException {
@@ -60,7 +70,7 @@ public final class RootCommand implements Runnable {
         server.createContext("/", new Handler(statusCode));
         server.start();
         printStatusCodeNotice();
-        IO.println("Listening for requests on port " + port);
+        printPortNotice();
     }
 
     private void printStatusCodeNotice() {
@@ -70,6 +80,15 @@ public final class RootCommand implements Runnable {
         HttpStatusCode httpStatusCode = HttpStatusCodes.get(statusCode);
         String message = HttpStatusCodeFormatter.format(httpStatusCode);
         IO.println("Responding with status code: " + message);
+    }
+
+    private void printPortNotice() {
+        if (port < 0 || port > 65535) {
+            IO.println("Warning: The provided port " + port + " is out of range (0-65535).");
+        }
+        Port portInfo = Ports.get(port);
+        String formattedPort = PortFormatter.format(portInfo);
+        IO.println("Listening for requests on port " + formattedPort);
     }
 
 }
