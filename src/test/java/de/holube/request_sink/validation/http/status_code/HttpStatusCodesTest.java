@@ -18,7 +18,7 @@ class HttpStatusCodesTest {
     void testGetUnknownStatusCode() {
         HttpStatusCode statusCode = HttpStatusCodes.get(999);
         assertEquals(999, statusCode.code());
-        assertEquals("Unknown Status Code", statusCode.description());
+        assertEquals("Out of Range Status Code", statusCode.description());
         assertEquals(HttpStatusCodeStatus.OUT_OF_RANGE, statusCode.status());
     }
 
