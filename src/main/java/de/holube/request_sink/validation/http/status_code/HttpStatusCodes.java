@@ -2,16 +2,11 @@ package de.holube.request_sink.validation.http.status_code;
 
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-import java.util.function.Supplier;
-
 /**
  * Utility class to access HTTP status codes.
  */
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public final class HttpStatusCodes {
-
-    private static final Supplier<Map<Integer, HttpStatusCode>> statusCodes = StableValue.supplier(HttpStatusCodeCsvReader::read);
 
     /**
      * Gets the HttpStatusCode for the given code.
@@ -22,11 +17,10 @@ public final class HttpStatusCodes {
      * @return the corresponding HttpStatusCode, or a default one if not found
      */
     public static HttpStatusCode get(int code) {
-        HttpStatusCode statusCode = statusCodes.get().get(code);
-        if (statusCode == null) {
-            return new StatusCode(code, "Unknown Status Code", HttpStatusCodeStatus.OUT_OF_RANGE);
+        if (code < 100 || code > 599) {
+            return new StatusCode(code, "Out of Range Status Code", HttpStatusCodeStatus.OUT_OF_RANGE);
         }
-        return statusCode;
+        return HttpStatusCodeCsvReader.readOne(code);
     }
 
 }
