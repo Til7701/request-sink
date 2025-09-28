@@ -1,22 +1,25 @@
 request-sink (0.0.4) UNRELEASED; urgency=medium
 
-  * T.B.D.
+  * The separators in the output are now limited by the terminal width.
+  * Added HTTP Status Code validation.
+  * Updated to Java 25.
 
  -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 18:04:55 +0200
 
+
 request-sink (0.0.3) unstable; urgency=medium
 
-  * The debian package now conforms to standard Debian packaging practices
-  * Added man pages
-  * Added tab completion for bash
-  * Added config subcommand to manage default values for port and status code
+  * The debian package now conforms to standard Debian packaging practices.
+  * Added man pages.
+  * Added tab completion for bash.
+  * Added config subcommand to manage default values for port and status code.
 
  -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 16:30:00 +0200
 
 
 request-sink (0.0.2) unstable; urgency=medium
 
-  * Added option to set status code returned to all requests
+  * Added option to set status code returned to all requests.
   * Separators in the output now have the same size.
   * Metadata and headers are now formatted uniformly.
 
