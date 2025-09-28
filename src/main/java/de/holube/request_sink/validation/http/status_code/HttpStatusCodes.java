@@ -12,8 +12,6 @@ import java.util.function.Supplier;
 public final class HttpStatusCodes {
 
     private static final Supplier<Map<Integer, HttpStatusCode>> statusCodes = StableValue.supplier(HttpStatusCodeCsvReader::read);
-    private static final Supplier<HttpStatusCode> unknownStatusCode = StableValue.supplier(() ->
-            new StatusCode(0, "Unknown Status Code", HttpStatusCodeStatus.OUT_OF_RANGE));
 
     /**
      * Gets the HttpStatusCode for the given code.
@@ -26,7 +24,7 @@ public final class HttpStatusCodes {
     public static HttpStatusCode get(int code) {
         HttpStatusCode statusCode = statusCodes.get().get(code);
         if (statusCode == null) {
-            return unknownStatusCode.get();
+            return new StatusCode(code, "Unknown Status Code", HttpStatusCodeStatus.OUT_OF_RANGE);
         }
         return statusCode;
     }
