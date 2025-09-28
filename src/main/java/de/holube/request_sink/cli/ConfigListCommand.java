@@ -4,7 +4,6 @@ import de.holube.request_sink.cli.mixins.HelpMixin;
 import de.holube.request_sink.config.Pref;
 import de.holube.request_sink.config.Prefs;
 import de.holube.request_sink.io.GroupBuilder;
-import de.holube.request_sink.io.IO;
 import de.holube.request_sink.io.LineBuilder;
 import picocli.CommandLine;
 

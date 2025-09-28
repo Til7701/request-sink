@@ -2,7 +2,6 @@ package de.holube.request_sink.server;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import de.holube.request_sink.io.IO;
 import de.holube.request_sink.io.OutputBuilder;
 
 import java.io.IOException;

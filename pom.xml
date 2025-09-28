@@ -91,6 +91,9 @@
                             <version>${lombok.version}</version>
                         </annotationProcessorPath>
                     </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -100,6 +103,7 @@
                 <configuration>
                     <!--suppress UnresolvedMavenProperty -->
                     <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+                    <argLine>--enable-preview</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -113,6 +117,7 @@
                     <stripDebug>true</stripDebug>
                     <compress>zip-1</compress>
                     <addOptions>-Drequest_sink.version=${project.version}</addOptions>
+                    <addOptions>--enable-preview</addOptions>
                 </configuration>
             </plugin>
             <plugin>
