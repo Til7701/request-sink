@@ -1,11 +1,13 @@
 package de.holube.request_sink;
 
 import de.holube.request_sink.cli.RootCommand;
+import lombok.NoArgsConstructor;
 import picocli.CommandLine;
 
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public final class RequestSinkApplication {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         CommandLine.Help.ColorScheme colorScheme = new CommandLine.Help.ColorScheme.Builder()
                 .commands(CommandLine.Help.Ansi.Style.bold, CommandLine.Help.Ansi.Style.underline)
                 .options(CommandLine.Help.Ansi.Style.fg_magenta)
@@ -19,8 +21,7 @@ public final class RequestSinkApplication {
         CommandLine cli = new CommandLine(new RootCommand());
         cli.setColorScheme(colorScheme);
         int exitCode = cli.execute(args);
-        if (exitCode != 0)
-            System.exit(exitCode);
+        System.exit(exitCode);
     }
 
 }
