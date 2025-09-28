@@ -2,6 +2,7 @@ request-sink (0.0.4) UNRELEASED; urgency=medium
 
   * The separators in the output are now limited by the terminal width.
   * Added HTTP Status Code validation.
+  * Added port validation.
   * Updated to Java 25.
 
  -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 18:04:55 +0200
