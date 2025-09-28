@@ -1,6 +1,7 @@
 package de.holube.request_sink.cli;
 
 import com.sun.net.httpserver.HttpServer;
+import de.holube.request_sink.cli.mixins.DebugMixin;
 import de.holube.request_sink.cli.providers.RootDefaultValueProvider;
 import de.holube.request_sink.cli.providers.VersionProvider;
 import de.holube.request_sink.io.HttpStatusCodeFormatter;
@@ -28,6 +29,9 @@ import java.util.concurrent.Callable;
         }
 )
 public final class RootCommand implements Callable<Integer> {
+
+    @CommandLine.Mixin
+    private DebugMixin debugMixin;
 
     @SuppressWarnings("unused")
     @CommandLine.Option(
@@ -66,9 +70,12 @@ public final class RootCommand implements Callable<Integer> {
     private void runInternal() throws IOException {
         InetSocketAddress address = new InetSocketAddress(port);
         HttpServer server = HttpServer.create();
+        CommandLine.tracer().debug("Binding to address %s", address);
         server.bind(address, 0);
         server.createContext("/", new Handler(statusCode));
+        CommandLine.tracer().debug("Starting Server...");
         server.start();
+        CommandLine.tracer().debug("Server started.");
         printStatusCodeNotice();
         printPortNotice();
     }
