@@ -4,6 +4,8 @@ request-sink (0.0.4) UNRELEASED; urgency=medium
   * Added HTTP Status Code validation.
   * Added port validation.
   * Made the list of config options more fancy.
+  * Added --debug option.
+  * You can now quit by pressing "q".
   * Updated to Java 25.
 
  -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 18:04:55 +0200

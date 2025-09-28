@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import de.holube.request_sink.cli.mixins.DebugMixin;
 import de.holube.request_sink.cli.providers.RootDefaultValueProvider;
 import de.holube.request_sink.cli.providers.VersionProvider;
+import de.holube.request_sink.io.Console;
 import de.holube.request_sink.io.HttpStatusCodeFormatter;
 import de.holube.request_sink.io.PortFormatter;
 import de.holube.request_sink.server.Handler;
@@ -14,6 +15,7 @@ import de.holube.request_sink.validation.port.Ports;
 import picocli.CommandLine;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Callable;
@@ -57,6 +59,10 @@ public final class RootCommand implements Callable<Integer> {
     public Integer call() {
         try {
             runInternal();
+            awaitExitSignal();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            CommandLine.tracer().debug("Interrupted, shutting down...", e);
         } catch (BindException e) {
             String portInfo = PortFormatter.format(Ports.get(port));
             IO.println("Error: Could not bind to port " + portInfo + ": " + e.getMessage());
@@ -96,6 +102,21 @@ public final class RootCommand implements Callable<Integer> {
         Port portInfo = Ports.get(port);
         String formattedPort = PortFormatter.format(portInfo);
         IO.println("Listening for requests on port " + formattedPort);
+    }
+
+    private void awaitExitSignal() throws IOException, InterruptedException {
+        CommandLine.tracer().debug("Preparing console for reading exit signal...");
+        Console.setTerminalToCBreak();
+        final InputStream in = System.in;
+        while (!Thread.interrupted()) {
+            int input = in.read();
+            if (input == 'q' || input == 'Q') {
+                CommandLine.tracer().debug("Quitting...");
+                break;
+            }
+        }
+        CommandLine.tracer().debug("Restoring console...");
+        Console.reset();
     }
 
 }
