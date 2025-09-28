@@ -52,7 +52,7 @@ final class PortCsvReader {
     }
 
     private static Optional<Port> parseFromLineWithCode(String csvLine, int number) {
-        String[] parts = csvLine.split(",");
+        String[] parts = csvLine.split(",", 5);
         if (parts.length < 4) {
             return Optional.empty();
         }
