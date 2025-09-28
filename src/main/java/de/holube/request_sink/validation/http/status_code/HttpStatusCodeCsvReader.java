@@ -8,9 +8,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+/**
+ * Utility class to read HTTP status codes from a CSV file and convert them into a map of HttpStatusCode objects.
+ * <p>
+ * The CSV file should be located in the same package as this class and named "http-status-codes-1.csv".
+ * The file can be obtained from <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">IANA</a>.
+ */
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 final class HttpStatusCodeCsvReader {
 
+    /**
+     * Reads the HTTP status codes from the CSV file and returns them as a map.
+     * The keys are the status code integers, and the values are the corresponding HttpStatusCode objects.
+     *
+     * @return a map of HTTP status codes
+     * @throws RuntimeException if the CSV file cannot be read or parsed
+     */
     static Map<Integer, HttpStatusCode> read() {
         try (InputStream is = HttpStatusCodes.class.getResourceAsStream("http-status-codes-1.csv")) {
             if (is == null) {
