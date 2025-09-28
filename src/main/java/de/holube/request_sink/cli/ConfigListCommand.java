@@ -23,14 +23,24 @@ public final class ConfigListCommand implements Runnable {
         GroupBuilder groupBuilder = new GroupBuilder();
         for (Pref pref : Pref.values()) {
             LineBuilder lineBuilder = new LineBuilder(
-                    pref.getKey(),
-                    Prefs.get(pref)
+                    formatKey(pref.getKey()),
+                    formatValue(Prefs.get(pref))
             );
             groupBuilder.addLine(lineBuilder);
         }
         StringBuilder sb = new StringBuilder();
         groupBuilder.build(sb);
         IO.print(sb.toString());
+    }
+
+    private String formatKey(String key) {
+        // FIXME use HTTP status code validation for formatting
+        return CommandLine.Help.Ansi.AUTO.string("@|bold,underline " + key + "|@");
+    }
+
+    private String formatValue(String value) {
+        // FIXME use port validation for formatting
+        return value;
     }
 
 }
