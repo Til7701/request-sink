@@ -8,8 +8,9 @@ A small cli application for logging requests to see what they look like.
 ## Usage
 
 ```
-Usage: request-sink [-hV] [-p=<port>] [-s=<statusCode>] [COMMAND]
+Usage: request-sink [-hV] [--debug] [-p=<port>] [-s=<statusCode>] [COMMAND]
 A simple http server listening for requests and logging them.
+      --debug         Enable debug output
   -h, --help          Show this help message and exit.
   -p, --port=<port>   The port to listen for requests on.
                         Default: 9090
@@ -18,7 +19,7 @@ A simple http server listening for requests and logging them.
                         Default: 200
   -V, --version       Print version information and exit.
 Commands:
-  config  Configures default options for the request sink server.
+  config  Configures default options for the request sink server
 ```
 
 Just run the app and send a request to `localhost:8080`.
@@ -26,15 +27,16 @@ Using simple `curl` and `wget` calls the following output is produced.
 
 ```
 $» request-sink        
-Listening for requests on port 8080
+Responding with status code: 200 - OK
+Listening for requests on port 8080 - HTTP Alternate (see port 80)
 ================ Request 0 Start ================
-Time:   2025-07-03T16:45:51.717754553Z
+Time:   2025-09-29T13:39:32.321047540Z
 Method: POST
 URI:    /
 ----------------- Headers Start -----------------
 Accept:         */*
 Host:           localhost:8080
-User-agent:     curl/8.5.0
+User-agent:     curl/8.12.1
 Content-type:   application/x-www-form-urlencoded
 Content-length: 18
 ------------------ Headers End ------------------
@@ -44,7 +46,7 @@ fancy request body
 ================= Request 0 End =================
 
 ========== Request 1 Start ===========
-Time:   2025-07-03T16:47:48.747746321Z
+Time:   2025-09-29T13:40:59.473792817Z
 Method: GET
 URI:    /
 ----------- Headers Start ------------
@@ -52,7 +54,7 @@ Accept-encoding: identity
 Accept:          */*
 Connection:      Keep-Alive
 Host:            localhost:8080
-User-agent:      Wget/1.21.4
+User-agent:      Wget/1.24.5
 ------------ Headers End -------------
 --------- No body in request ---------
 =========== Request 1 End ============
@@ -80,11 +82,11 @@ Alternatively, if you have `apt` or `dpkg` installed, download the latest releas
 following commands depending on what you want to use. `apt` is recommended.
 
 ```bash
-sudo apt install request-sink_0.0.3_amd64.deb
+sudo apt install request-sink_0.0.4_amd64.deb
 ```
 
 ```bash
-sudo dpkg -i request-sink_0.0.3_amd64.deb
+sudo dpkg -i request-sink_0.0.4_amd64.deb
 ```
 
 ##### Post Installation
