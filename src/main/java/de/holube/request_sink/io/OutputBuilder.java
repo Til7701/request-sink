@@ -53,9 +53,7 @@ public final class OutputBuilder {
         final int headersLength = headers.getWidth();
         final int minWidth = String.valueOf(id).length() + 20;
         final int maxWidth = Math.max(Math.max(metadataLength, headersLength), minWidth);
-        CommandLine.Model.UsageMessageSpec usageMessageSpec = new CommandLine.Model.UsageMessageSpec();
-        usageMessageSpec.autoWidth(true);
-        final int terminalWidth = usageMessageSpec.width();
+        final int terminalWidth = Terminal.getWidth();
         CommandLine.tracer().debug("Detected terminal width: %d", terminalWidth);
         return Math.min(maxWidth, terminalWidth);
     }

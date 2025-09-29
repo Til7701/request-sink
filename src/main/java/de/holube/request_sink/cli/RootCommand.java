@@ -4,9 +4,9 @@ import com.sun.net.httpserver.HttpServer;
 import de.holube.request_sink.cli.mixins.DebugMixin;
 import de.holube.request_sink.cli.providers.RootDefaultValueProvider;
 import de.holube.request_sink.cli.providers.VersionProvider;
-import de.holube.request_sink.io.Console;
 import de.holube.request_sink.io.HttpStatusCodeFormatter;
 import de.holube.request_sink.io.PortFormatter;
+import de.holube.request_sink.io.Terminal;
 import de.holube.request_sink.server.Handler;
 import de.holube.request_sink.validation.http.status_code.HttpStatusCode;
 import de.holube.request_sink.validation.http.status_code.HttpStatusCodes;
@@ -106,17 +106,21 @@ public final class RootCommand implements Callable<Integer> {
 
     private void awaitExitSignal() throws IOException, InterruptedException {
         CommandLine.tracer().debug("Preparing console for reading exit signal...");
-        Console.setTerminalToCBreak();
-        final InputStream in = System.in;
-        while (!Thread.interrupted()) {
-            int input = in.read();
-            if (input == 'q' || input == 'Q') {
-                CommandLine.tracer().debug("Quitting...");
-                break;
+        Terminal.setTerminalToCBreak();
+        try {
+            final InputStream in = System.in;
+            while (!Thread.currentThread().isInterrupted()) {
+                int input = in.read();
+                if (input == 'q' || input == 'Q') {
+                    CommandLine.tracer().debug("Quitting...");
+                    return;
+                }
             }
+            CommandLine.tracer().debug("Interrupted while waiting for exit signal.");
+        } finally {
+            CommandLine.tracer().debug("Restoring console...");
+            Terminal.reset();
         }
-        CommandLine.tracer().debug("Restoring console...");
-        Console.reset();
     }
 
 }
