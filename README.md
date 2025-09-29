@@ -30,9 +30,11 @@ $» request-sink
 Responding with status code: 200 - OK
 Listening for requests on port 8080 - HTTP Alternate (see port 80)
 ================ Request 0 Start ================
-Time:   2025-09-29T13:39:32.321047540Z
-Method: POST
-URI:    /
+Protocol:    HTTP/1.1
+Time:        2025-09-29T14:11:50.754777257Z
+Method:      POST
+URI:         /
+Body-Length: 18
 ----------------- Headers Start -----------------
 Accept:         */*
 Host:           localhost:8080
@@ -45,19 +47,21 @@ fancy request body
 ------------------- Body End --------------------
 ================= Request 0 End =================
 
-========== Request 1 Start ===========
-Time:   2025-09-29T13:40:59.473792817Z
-Method: GET
-URI:    /
------------ Headers Start ------------
+============= Request 1 Start =============
+Protocol:    HTTP/1.1
+Time:        2025-09-29T14:11:56.293713214Z
+Method:      GET
+URI:         /
+Body-Length: 0
+-------------- Headers Start --------------
 Accept-encoding: identity
 Accept:          */*
 Connection:      Keep-Alive
 Host:            localhost:8080
 User-agent:      Wget/1.24.5
------------- Headers End -------------
---------- No body in request ---------
-=========== Request 1 End ============
+--------------- Headers End ---------------
+----------- No body in request ------------
+============== Request 1 End ==============
 ```
 
 ## Installation
