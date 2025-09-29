@@ -1,4 +1,11 @@
-request-sink (0.0.4) UNRELEASED; urgency=medium
+request-sink (0.0.5) UNRELEASED; urgency=medium
+
+  * TBD
+
+ -- Til7701 <tilman@holube.de>  Mon, 29 Sep 2025 16:56:56 +0200
+
+
+request-sink (0.0.4) unstable; urgency=medium
 
   * The separators in the output are now limited by the terminal width.
   * Added HTTP Status Code validation.
@@ -10,7 +17,7 @@ request-sink (0.0.4) UNRELEASED; urgency=medium
   * The protocol is now shown in the output.
   * Updated to Java 25.
 
- -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 18:04:55 +0200
+ -- Til7701 <tilman@holube.de>  Mon, 29 Sep 2025 16:56:55 +0200
 
 
 request-sink (0.0.3) unstable; urgency=medium

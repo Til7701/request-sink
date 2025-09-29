@@ -86,11 +86,11 @@ Alternatively, if you have `apt` or `dpkg` installed, download the latest releas
 following commands depending on what you want to use. `apt` is recommended.
 
 ```bash
-sudo apt install request-sink_0.0.4_amd64.deb
+sudo apt install request-sink_0.0.5_amd64.deb
 ```
 
 ```bash
-sudo dpkg -i request-sink_0.0.4_amd64.deb
+sudo dpkg -i request-sink_0.0.5_amd64.deb
 ```
 
 ##### Post Installation
