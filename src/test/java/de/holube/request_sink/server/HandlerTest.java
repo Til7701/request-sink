@@ -22,6 +22,7 @@ class HandlerTest {
 
     @Test
     void testResponse() throws IOException {
+        when(exchange.getProtocol()).thenReturn("HTTP/1.1");
         when(exchange.getRequestMethod()).thenReturn("GET");
         when(exchange.getRequestURI()).thenReturn(java.net.URI.create("/test"));
         when(exchange.getRequestHeaders()).thenReturn(new Headers(Map.of(
