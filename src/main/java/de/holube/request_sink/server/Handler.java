@@ -39,6 +39,7 @@ public final class Handler implements HttpHandler {
 
         // Metadata
         ob.setId(requestCounter.getAndIncrement());
+        ob.addMetadataLine("Protocol", exchange.getProtocol());
         ob.addMetadataLine("Time", Instant.now().toString());
         ob.addMetadataLine("Method", exchange.getRequestMethod());
         ob.addMetadataLine("URI", exchange.getRequestURI().toString());
