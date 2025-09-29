@@ -6,6 +6,8 @@ request-sink (0.0.4) UNRELEASED; urgency=medium
   * Made the list of config options more fancy.
   * Added --debug option.
   * You can now quit by pressing "q".
+  * The actual body length is now shown in the output.
+  * The protocol is now shown in the output.
   * Updated to Java 25.
 
  -- Til7701 <tilman@holube.de>  Wed, 06 Aug 2025 18:04:55 +0200

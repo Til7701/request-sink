@@ -39,6 +39,7 @@ public final class Handler implements HttpHandler {
 
         // Metadata
         ob.setId(requestCounter.getAndIncrement());
+        ob.addMetadataLine("Protocol", exchange.getProtocol());
         ob.addMetadataLine("Time", Instant.now().toString());
         ob.addMetadataLine("Method", exchange.getRequestMethod());
         ob.addMetadataLine("URI", exchange.getRequestURI().toString());
@@ -49,8 +50,10 @@ public final class Handler implements HttpHandler {
 
         // Body
         try {
-            String body = new String(exchange.getRequestBody().readAllBytes());
+            byte[] bodyBytes = exchange.getRequestBody().readAllBytes();
+            String body = new String(bodyBytes);
             ob.setBody(body);
+            ob.addMetadataLine("Body-Length", String.valueOf(bodyBytes.length));
         } catch (IOException e) {
             CommandLine.tracer().debug("Failed to read request body", e);
         }
