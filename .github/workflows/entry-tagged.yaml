@@ -51,6 +51,7 @@ jobs:
   release-docker:
     needs:
       - test-deb
+      - create-version-string
     uses: ./.github/workflows/release-docker.yaml
     with:
       tag: ${{ github.ref_name }}
