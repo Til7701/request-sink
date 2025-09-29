@@ -62,12 +62,12 @@ User-agent:      Wget/1.21.4
 
 ### Linux
 
-#### DEB Package (Debian, Ubuntu...)
+#### DEB Package (Debian, Ubuntu, ...)
 
 ##### PPA
 
 This package is included in the [Schlunzis PPA](https://github.com/schlunzis/ppa).
-Follow the instructions there to setup the ppa. Then run the following.
+Follow the instructions there to set up the ppa. Then run the following.
 
 ```bash
 sudo apt update
@@ -89,7 +89,8 @@ sudo dpkg -i request-sink_0.0.3_amd64.deb
 
 ##### Post Installation
 
-After installing the deb package, see [Wiki](https://github.com/Til7701/request-sink/wiki/Post-Installation) for further configuration.
+After installing the deb package, see [Wiki](https://github.com/Til7701/request-sink/wiki/Post-Installation) for further
+configuration.
 
 #### Other
 
@@ -104,9 +105,9 @@ Follow the build instructions below and run the `msi` file in the `target` direc
 
 To build the project, you need the following:
 
-- Java 24 or newer in your PATH or JAVA_HOME
-- on Linux, you need to have `dpkg build-essential debhelper devscripts` installed. JLink and JPackage will tell you if something is
-  missing.
+- Java 25 or newer in your PATH or JAVA_HOME
+- on Linux, you need to have `dpkg build-essential debhelper devscripts` installed. JLink and JPackage will tell you if
+  something is missing.
 - on Windows, you need to have WiX Toolset installed (https://wixtoolset.org/)
 
 > [!NOTE]
@@ -120,7 +121,8 @@ just build
 
 On Linux:
 
-This will create an image of the app in the `target` folder. You can place that anywhere and run `request-sink` in the bin folder.
+This will create an image of the app in the `target` folder. You can place that anywhere and run `request-sink` in the
+bin folder.
 If you want the deb package, you can run the following command instead:
 
 ```bash
