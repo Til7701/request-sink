@@ -13,7 +13,7 @@ A simple http server listening for requests and logging them.
       --debug         Enable debug output
   -h, --help          Show this help message and exit.
   -p, --port=<port>   The port to listen for requests on.
-                        Default: 9090
+                        Default: 8080
   -s, --status-code=<statusCode>
                       The status code to return.
                         Default: 200
