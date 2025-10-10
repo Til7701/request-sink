@@ -15,5 +15,7 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
           cache: maven
+      - name: Print Java version
+        run: java --version
       - name: Verify with Maven
         run: ./mvnw --batch-mode --update-snapshots verify

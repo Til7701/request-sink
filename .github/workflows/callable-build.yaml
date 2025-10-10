@@ -26,6 +26,8 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
           cache: maven
+      - name: Print Java version
+        run: java --version
       - name: Set up Just
         uses: extractions/setup-just@v3
         with:
