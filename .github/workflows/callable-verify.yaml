@@ -31,4 +31,6 @@ jobs:
           sudo update-java-alternatives -s temurin-25-jdk
           java --version
       - name: Verify with Maven
-        run: ./mvnw --batch-mode --update-snapshots verify
+        run: |
+          sudo update-java-alternatives -s temurin-25-jdk
+          ./mvnw --batch-mode --update-snapshots verify
