@@ -25,6 +25,10 @@ jobs:
           sudo apt update
           sudo apt install temurin-25-jdk
       - name: Print Java version
-        run: java --version
+        run: |
+          java --version
+          update-java-alternatives -l
+          sudo update-java-alternatives -s temurin-25-jdk
+          java --version
       - name: Verify with Maven
         run: ./mvnw --batch-mode --update-snapshots verify
