@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          java-version: '25'
-          distribution: 'temurin'
-          cache: maven
-      - name: Print Java version
-        run: java --version
+      #      - name: Set up JDK
+      #        uses: actions/setup-java@v5
+      #        with:
+      #          java-version: '25'
+      #          distribution: 'temurin'
+      #          cache: maven
+      #      - name: Print Java version
+      #        run: java --version
       - name: Install Temurin via PPA
         run: |
           sudo apt install -y wget apt-transport-https gpg
