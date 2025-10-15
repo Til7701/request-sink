@@ -34,4 +34,5 @@ jobs:
         run: |
           ./mvnw -v
           sudo update-java-alternatives -s temurin-25-jdk-amd64
+          export JAVA_HOME=/usr/lib/jvm/temurin-25-jdk-amd64
           ./mvnw --batch-mode --update-snapshots verify
