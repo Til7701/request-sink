@@ -164,7 +164,7 @@ class OutputBuilderTest {
         String actualOutput = outputBuilder.build();
 
         // Default width by picocli is 80 characters.
-        String expectedOutput = """
+        String expectedOutput1 = """
                 =============================== Request 42 Start ===============================
                 URL: /api/patch?id=78934532946509236592456456346752347986792348769074259345602906592396
                 -------------------------------- Headers Start ---------------------------------
@@ -176,7 +176,25 @@ class OutputBuilderTest {
                 ----------------------------------- Body End -----------------------------------
                 ================================ Request 42 End ================================
                 """;
-        assertEquals(expectedOutput, actualOutput);
+        String expectedOutput2 = """
+                ================================== Request 42 Start ===================================
+                URL: /api/patch?id=78934532946509236592456456346752347986792348769074259345602906592396
+                ------------------------------------ Headers Start ------------------------------------
+                Content-Type: application/json
+                User-Agent:   TestAgent/3.0
+                ------------------------------------- Headers End -------------------------------------
+                ------------------------------------- Body Start --------------------------------------
+                {"key":"value"}
+                -------------------------------------- Body End ---------------------------------------
+                =================================== Request 42 End ====================================
+                """;
+        // Depending on the environment (OS, terminal, IDE) we detect different default widths.
+        if (!actualOutput.equals(expectedOutput1) && !actualOutput.equals(expectedOutput2)) {
+            throw new AssertionError("Output did not match expected output for width.\n" +
+                    "Expected:\n" + expectedOutput1 + "\n" +
+                    "Expected:\n" + expectedOutput2 + "\n" +
+                    "Actual:\n" + actualOutput);
+        }
     }
 
 }
