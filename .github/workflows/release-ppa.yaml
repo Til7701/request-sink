@@ -8,7 +8,7 @@ jobs:
     name: Download and Release Artifacts to PPA
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         name: Download deb-Package
         with:
           name: deb
