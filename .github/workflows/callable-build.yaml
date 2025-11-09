@@ -49,7 +49,7 @@ jobs:
           
           just deb
       - name: Upload DEB Package
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: deb
           path: ./target/request-sink_${{ inputs.version }}_amd64.deb
@@ -57,7 +57,7 @@ jobs:
           overwrite: true
           if-no-files-found: error
       - name: Upload App Image
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: app-image
           path: ./target/request-sink-${{ inputs.version }}.zip
